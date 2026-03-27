@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PitchShow — Get Started</title>
+<meta name="description" content="Start building AI presentations in 30 seconds. No install, no API key. Or download the open source desktop app and bring your own model."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="page.css"/>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad" cx="40%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="#FFF9F4"/>
+      <stop offset="52%" stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+<aside class="sidebar" id="sidebar">
+  <button class="sb-search" id="sbSearch" title="Search" aria-label="Search">
+    <i data-lucide="search"></i>
+  </button>
+  <nav class="sb-nav">
+    <a href="./index.html" class="sb-item" title="Home">
+      <div class="sb-icon"><i data-lucide="home"></i></div>
+      <span class="sb-label">Home</span>
+    </a>
+    <a href="./get-started.html" class="sb-item active" title="Get started">
+      <div class="sb-icon"><i data-lucide="rocket"></i></div>
+      <span class="sb-label">Start</span>
+    </a>
+    <a href="./styles.html" class="sb-item" title="Styles">
+      <div class="sb-icon"><i data-lucide="palette"></i></div>
+      <span class="sb-label">Styles</span>
+    </a>
+    <a href="./docs.html" class="sb-item" title="Docs">
+      <div class="sb-icon"><i data-lucide="book-open"></i></div>
+      <span class="sb-label">Docs</span>
+    </a>
+    <a href="./community.html" class="sb-item" title="Community">
+      <div class="sb-icon"><i data-lucide="users"></i></div>
+      <span class="sb-label">Community</span>
+    </a>
+    <a href="./blog.html" class="sb-item" title="Blog">
+      <div class="sb-icon"><i data-lucide="newspaper"></i></div>
+      <span class="sb-label">Blog</span>
+    </a>
+  </nav>
+  <nav class="sb-nav sb-nav-bottom">
+    <a href="./pricing.html" class="sb-item" title="Pricing">
+      <div class="sb-icon"><i data-lucide="credit-card"></i></div>
+      <span class="sb-label">Pricing</span>
+    </a>
+    <a href="./support.html" class="sb-item" title="Support">
+      <div class="sb-icon"><i data-lucide="life-buoy"></i></div>
+      <span class="sb-label">Support</span>
+    </a>
+    <a href="./enterprise.html" class="sb-item" title="Enterprise">
+      <div class="sb-icon"><i data-lucide="building-2"></i></div>
+      <span class="sb-label">Business</span>
+    </a>
+  </nav>
+  <div class="sb-footer">
+    <a href="https://github.com/pitchshow/pitchshow" class="sb-icon-btn" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+    <div class="f-soc">
+          <a href="https://github.com/pitchshow/pitchshow" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://x.com/pitchshowai" target="_blank" title="X / Twitter @pitchshowai"><i data-lucide="twitter"></i></a>
+          <a href="https://youtube.com/@PitchShowAI" target="_blank" title="YouTube @PitchShowAI"><i data-lucide="youtube"></i></a>
+          <a href="https://instagram.com/pitchshowai" target="_blank" title="Instagram @pitchshowai"><i data-lucide="instagram"></i></a>
+          <a href="https://tiktok.com/@pitchshowai" target="_blank" title="TikTok @pitchshowai">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.77 1.52V7.17a4.85 4.85 0 01-1-.48z"/></svg>
+          </a>
+          <a href="https://discord.gg/pitchshow" target="_blank" title="Discord">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          </a>
+          <a href="https://reddit.com/r/pitchshow" target="_blank" title="Reddit r/pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </a>
+          <a href="https://producthunt.com/@pitchshow" target="_blank" title="Product Hunt @pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.604 8.4h-3.405V12h3.405a1.8 1.8 0 000-3.6zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4H10.2v3.6H7.8V6h5.804a4.2 4.2 0 010 8.4z"/></svg>
+          </a>
+        </div>
+    <!-- sign-in button: visible after Cloud launch -->
+  </div>
+</aside>
+
+<main class="main pg">
+  <div class="pg-hero">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="pg-hero-inner">
+      <div class="pg-kicker gs-up">Get started</div>
+      <h1 class="pg-h1 gs-up">First deck in under<br/>5 minutes.</h1>
+      <p class="pg-sub gs-up">Sign up and start on the web — no install, no API key.<br/>Or download the open source desktop app and bring your own model.</p>
+    </div>
+  </div>
+
+  <div class="pg-section">
+    <div class="pg-wrap">
+
+      <!-- Tab switcher — Web first -->
+      <div class="path-tabs gs-up">
+        <button class="path-tab active" data-tab="web">
+          <i data-lucide="sparkles" style="width:16px;height:16px"></i>
+          Web — Start free
+        </button>
+        <button class="path-tab" data-tab="desktop">
+          <i data-lucide="monitor" style="width:16px;height:16px"></i>
+          Desktop App
+        </button>
+        <button class="path-tab" data-tab="mcp">
+          <i data-lucide="code-2" style="width:16px;height:16px"></i>
+          MCP / IDE
+        </button>
+      </div>
+
+      <!-- ── Web tab (primary) ── -->
+      <div class="path-content active" id="tab-web">
+
+        <!-- Hero CTA -->
+        <div class="web-path-hero gs-up">
+          <div class="web-path-icon"><i data-lucide="sparkles" style="width:32px;height:32px"></i></div>
+          <h2>No install. No API key.<br/>Just sign up and pitch.</h2>
+          <p>Your first 3 complete decks are free — full AI generation, full animations, shareable URL. No credit card required.</p>
+          <a href="#" class="btn-pill-primary" data-waitlist>
+            Start for free
+            <i data-lucide="arrow-right" style="width:15px;height:15px"></i>
+          </a>
+        </div>
+
+        <!-- What you get -->
+        <div class="web-path-features gs-card">
+          <div class="wpf-item"><i data-lucide="check" style="width:14px;height:14px"></i><span>Full Spec Mode — AI researches, writes, and builds your deck</span></div>
+          <div class="wpf-item"><i data-lucide="check" style="width:14px;height:14px"></i><span>Full Vibe Mode — click any element, describe the change, done</span></div>
+          <div class="wpf-item"><i data-lucide="check" style="width:14px;height:14px"></i><span>Animated slides that run in your browser at a shareable URL</span></div>
+          <div class="wpf-item"><i data-lucide="check" style="width:14px;height:14px"></i><span>Export to PDF, PPTX, and HTML</span></div>
+          <div class="wpf-item"><i data-lucide="check" style="width:14px;height:14px"></i><span>Download as .pitchshow bundle — continue editing in the desktop app</span></div>
+          <div class="wpf-item wpf-upgrade"><i data-lucide="zap" style="width:14px;height:14px"></i><span>Upgrade to Pro — Animated PPTX · unlimited shows · industry templates · Claude Sonnet</span></div>
+        </div>
+
+        <!-- How it works — 4 steps -->
+        <div class="section-kicker gs-card" style="margin-top:40px"><i data-lucide="map" style="width:12px;height:12px"></i>How it works</div>
+        <h2 class="section-h2 gs-card">From idea to animated show in 4 steps.</h2>
+
+        <div class="setup-steps" style="margin-top:24px">
+          <div class="setup-step gs-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Describe your deck</h3>
+              <p>Tell PitchShow what you need: topic, audience, length, and goal. Be as brief or as specific as you like — <em>"10-slide investor pitch for a B2B SaaS, Series A"</em> or just <em>"quarterly business review"</em> both work.</p>
+            </div>
+          </div>
+          <div class="setup-step gs-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>AI researches and structures the narrative</h3>
+              <p>PitchShow searches the web, reads sources, and builds a slide-by-slide storyline. You review the outline before any slides are generated — you're always in control of the story.</p>
+            </div>
+          </div>
+          <div class="setup-step gs-card">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Watch it build, slide by slide</h3>
+              <p>PitchShow generates each slide as animated React code — live in your browser, in batches of three. You can see the presentation take shape as it writes. No waiting for a full render at the end.</p>
+            </div>
+          </div>
+          <div class="setup-step gs-card">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Refine, present, share</h3>
+              <p>Use <strong>Vibe Mode</strong> to click any slide element and describe what to change. When you're ready: present with speaker notes, export the file, or share a permanent animated URL.</p>
+              <div class="code-hint"><code>Tip: "Make this slide more data-driven" or "Change the tone to be less formal" works just as well as precise edits.</code></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model choice callout -->
+        <div class="gs-start-model-note gs-card">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--tx);margin-bottom:4px">Which AI model runs my deck?</div>
+            <div style="font-size:12px;color:var(--tx2);line-height:1.6">Free tier uses <strong>DeepSeek V3</strong> — fast, capable, and good enough to show you what PitchShow can do. Pro users get <strong>Claude Haiku</strong> as default (everyday generation) and <strong>Claude Sonnet</strong> for high-stakes pitches. <a href="./pricing.html" style="color:var(--p300)">See model details →</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── Desktop tab ── -->
+      <div class="path-content" id="tab-desktop">
+
+        <div class="dl-cards gs-up">
+          <a href="#" class="dl-card dl-card-primary">
+            <i data-lucide="apple" style="width:22px;height:22px"></i>
+            <div>
+              <div class="dl-card-title">macOS</div>
+              <div class="dl-card-sub">Apple Silicon + Intel · v0.5.0</div>
+            </div>
+            <i data-lucide="arrow-down" style="width:16px;height:16px;margin-left:auto"></i>
+          </a>
+          <a href="#" class="dl-card">
+            <i data-lucide="monitor" style="width:22px;height:22px"></i>
+            <div>
+              <div class="dl-card-title">Windows</div>
+              <div class="dl-card-sub">Windows 10/11 · v0.5.0</div>
+            </div>
+            <i data-lucide="arrow-down" style="width:16px;height:16px;margin-left:auto"></i>
+          </a>
+          <a href="https://github.com/pitchshow/pitchshow" class="dl-card" target="_blank">
+            <i data-lucide="terminal" style="width:22px;height:22px"></i>
+            <div>
+              <div class="dl-card-title">Linux / Build from source</div>
+              <div class="dl-card-sub">Node.js 18+ · npm install</div>
+            </div>
+            <i data-lucide="external-link" style="width:16px;height:16px;margin-left:auto"></i>
+          </a>
+        </div>
+
+        <div class="setup-steps">
+          <div class="setup-step gs-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Install and open</h3>
+              <p>Download the installer for your OS. On macOS: drag to Applications, then open. If you see a security warning, right-click → Open to bypass Gatekeeper. Node.js 18+ must be installed — <a href="https://nodejs.org" target="_blank" style="color:var(--p300)">nodejs.org</a>.</p>
+            </div>
+          </div>
+          <div class="setup-step gs-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Connect your AI provider</h3>
+              <p>Go to <strong>Settings → AI Provider</strong>. Choose one:</p>
+              <div class="provider-chips">
+                <span>AWS Bedrock</span><span>OpenAI</span><span>DeepSeek</span>
+                <span>Gemini</span><span>Grok</span><span>Groq</span>
+                <span>OpenRouter</span>
+              </div>
+              <p style="margin-top:10px;font-size:13px;color:var(--tx2)">AWS Bedrock reads your <code>~/.aws/credentials</code> automatically if configured. All others need an API key from the provider's dashboard.</p>
+            </div>
+          </div>
+          <div class="setup-step gs-card">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Create your first deck</h3>
+              <p>Click <strong>+ New Deck</strong>. Describe your topic, audience, and duration. PitchShow researches, writes the narrative, and builds animated slides while you watch.</p>
+              <div class="code-hint"><code>"10-minute pitch for our SaaS to enterprise CTOs, Series A fundraising"</code></div>
+            </div>
+          </div>
+          <div class="setup-step gs-card">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Edit, present, export</h3>
+              <p>Use <strong>Vibe Mode</strong> to click any element and describe changes in natural language. Press <strong>Present</strong> for speaker view. Export as PDF, PPTX, or HTML — or upload to the web for a permanent animated URL.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop vs Web comparison -->
+        <div class="gs-compare gs-card">
+          <div class="gs-compare-title">Desktop vs Web — which is right for you?</div>
+          <div class="gs-compare-grid">
+            <div class="gs-compare-col">
+              <div class="gs-compare-head"><i data-lucide="monitor" style="width:14px;height:14px"></i> Desktop (free, open source)</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Runs locally, data stays on your machine</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Any AI provider via your own API key</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Unlimited presentations</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Best for technical users and power users</div>
+              <div class="gs-compare-item gs-compare-no"><i data-lucide="x" style="width:12px;height:12px;color:var(--tx3)"></i> No Animated PPTX (server-side feature)</div>
+              <div class="gs-compare-item gs-compare-no"><i data-lucide="x" style="width:12px;height:12px;color:var(--tx3)"></i> Only 1 hosted show URL</div>
+            </div>
+            <div class="gs-compare-col">
+              <div class="gs-compare-head"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Web Pro ($12/month)</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> No install, works in any browser</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Hosted AI — we handle the API keys</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Animated PPTX export</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Unlimited hosted show URLs</div>
+              <div class="gs-compare-item"><i data-lucide="check" style="width:12px;height:12px;color:#3ddb8a"></i> Industry templates (VC Pitch, Sales, Q-Report…)</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── MCP tab ── -->
+      <div class="path-content" id="tab-mcp">
+        <div class="mcp-intro gs-up">
+          <h2>Generate decks from your IDE</h2>
+          <p>Add PitchShow as an MCP server. Call <code>pitchshow_generate_deck</code> from Claude Code, Cursor, or Gemini CLI — no context switch, no new tab. Requires the desktop app.</p>
+        </div>
+        <div class="mcp-steps">
+          <div class="mcp-ide gs-card">
+            <div class="mcp-ide-head">
+              <i data-lucide="file-code" style="width:14px;height:14px"></i>
+              Claude Code — <code>~/.claude/settings.json</code>
+            </div>
+            <pre class="mcp-code">{
+  "mcpServers": {
+    "pitchshow": {
+      "command": "node",
+      "args": [
+        "/Applications/PitchShow.app/Contents/Resources/app.asar.unpacked/dist/mcp/server.js"
+      ]
+    }
+  }
+}</pre>
+          </div>
+          <div class="mcp-ide gs-card">
+            <div class="mcp-ide-head">
+              <i data-lucide="file-code" style="width:14px;height:14px"></i>
+              Cursor — <code>.cursor/mcp.json</code>
+            </div>
+            <pre class="mcp-code">{
+  "mcpServers": {
+    "pitchshow": {
+      "command": "node",
+      "args": [
+        "/Applications/PitchShow.app/Contents/Resources/app.asar.unpacked/dist/mcp/server.js"
+      ]
+    }
+  }
+}</pre>
+          </div>
+        </div>
+        <div class="mcp-tools gs-card">
+          <h3>Available tools</h3>
+          <div class="mcp-tool"><code>pitchshow_generate_deck</code><span>Generate a full animated deck from a topic or brief</span></div>
+          <div class="mcp-tool"><code>pitchshow_import_deck</code><span>Rebuild an existing .pptx as animated React slides</span></div>
+          <div class="mcp-tool"><code>pitchshow_vibe</code><span>Edit a specific slide using natural language</span></div>
+          <div class="mcp-tool"><code>pitchshow_export</code><span>Export the current deck as PDF, PPTX, or HTML</span></div>
+          <div class="mcp-tool"><code>pitchshow_status</code><span>Check if PitchShow is running and return the preview URL</span></div>
+        </div>
+        <div class="gs-start-model-note gs-card" style="margin-top:16px">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--tx);margin-bottom:4px">MCP uses your desktop app's AI provider</div>
+            <div style="font-size:12px;color:var(--tx2);line-height:1.6">Whichever provider you configured in Settings is used for MCP generation. Your API key is never sent to the MCP client — it stays in the desktop app.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<script src="vendor/lucide.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

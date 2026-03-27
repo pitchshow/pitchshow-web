@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PitchShow Enterprise — Private AI Deployment</title>
+<meta name="description" content="Deploy PitchShow on your infrastructure. Private LLMs. Knowledge base integration. Customized outputs for training, finance, and government."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="page.css"/>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad" cx="40%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="#FFF9F4"/>
+      <stop offset="52%" stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<aside class="sidebar" id="sidebar">
+  <button class="sb-search" id="sbSearch" title="Search" aria-label="Search">
+    <i data-lucide="search"></i>
+  </button>
+  <nav class="sb-nav">
+    <a href="./index.html" class="sb-item" title="Home">
+      <div class="sb-icon"><i data-lucide="home"></i></div>
+      <span class="sb-label">Home</span>
+    </a>
+    <a href="./get-started.html" class="sb-item" title="Get started">
+      <div class="sb-icon"><i data-lucide="rocket"></i></div>
+      <span class="sb-label">Start</span>
+    </a>
+    <a href="./styles.html" class="sb-item" title="Styles">
+      <div class="sb-icon"><i data-lucide="palette"></i></div>
+      <span class="sb-label">Styles</span>
+    </a>
+    <a href="./docs.html" class="sb-item" title="Docs">
+      <div class="sb-icon"><i data-lucide="book-open"></i></div>
+      <span class="sb-label">Docs</span>
+    </a>
+    <a href="./community.html" class="sb-item" title="Community">
+      <div class="sb-icon"><i data-lucide="users"></i></div>
+      <span class="sb-label">Community</span>
+    </a>
+    <a href="./blog.html" class="sb-item" title="Blog">
+      <div class="sb-icon"><i data-lucide="newspaper"></i></div>
+      <span class="sb-label">Blog</span>
+    </a>
+  </nav>
+  <nav class="sb-nav sb-nav-bottom">
+    <a href="./pricing.html" class="sb-item" title="Pricing">
+      <div class="sb-icon"><i data-lucide="credit-card"></i></div>
+      <span class="sb-label">Pricing</span>
+    </a>
+    <a href="./support.html" class="sb-item" title="Support">
+      <div class="sb-icon"><i data-lucide="life-buoy"></i></div>
+      <span class="sb-label">Support</span>
+    </a>
+    <a href="./enterprise.html" class="sb-item active" title="Enterprise">
+      <div class="sb-icon"><i data-lucide="building-2"></i></div>
+      <span class="sb-label">Business</span>
+    </a>
+  </nav>
+  <div class="sb-footer">
+    <a href="https://github.com/pitchshow/pitchshow" class="sb-icon-btn" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+    <div class="f-soc">
+          <a href="https://github.com/pitchshow/pitchshow" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://x.com/pitchshowai" target="_blank" title="X / Twitter @pitchshowai"><i data-lucide="twitter"></i></a>
+          <a href="https://youtube.com/@PitchShowAI" target="_blank" title="YouTube @PitchShowAI"><i data-lucide="youtube"></i></a>
+          <a href="https://instagram.com/pitchshowai" target="_blank" title="Instagram @pitchshowai"><i data-lucide="instagram"></i></a>
+          <a href="https://tiktok.com/@pitchshowai" target="_blank" title="TikTok @pitchshowai">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.77 1.52V7.17a4.85 4.85 0 01-1-.48z"/></svg>
+          </a>
+          <a href="https://discord.gg/pitchshow" target="_blank" title="Discord">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          </a>
+          <a href="https://reddit.com/r/pitchshow" target="_blank" title="Reddit r/pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </a>
+          <a href="https://producthunt.com/@pitchshow" target="_blank" title="Product Hunt @pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.604 8.4h-3.405V12h3.405a1.8 1.8 0 000-3.6zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4H10.2v3.6H7.8V6h5.804a4.2 4.2 0 010 8.4z"/></svg>
+          </a>
+        </div>
+    <!-- sign-in button: visible after Cloud launch -->
+  </div>
+</aside>
+
+<main class="main pg">
+
+  <!-- ── Hero ── -->
+  <div class="pg-hero pg-hero-ent">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="pg-hero-inner">
+      <div class="pg-kicker gs-up">Enterprise</div>
+      <h1 class="pg-h1 gs-up">Your models. Your data.<br/>Your outputs. Your rules.</h1>
+      <p class="pg-sub gs-up">Deploy PitchShow on your own infrastructure. Connect private LLMs. Feed your knowledge base. Generate presentations, training modules, and assessments — without a single byte leaving your network.</p>
+      <div class="ent-badges gs-up">
+        <span><i data-lucide="shield-check" style="width:13px;height:13px"></i>Data sovereignty</span>
+        <span><i data-lucide="cpu" style="width:13px;height:13px"></i>Private LLM integration</span>
+        <span><i data-lucide="database" style="width:13px;height:13px"></i>Knowledge base</span>
+        <span><i data-lucide="lock" style="width:13px;height:13px"></i>Air-gapped option</span>
+      </div>
+      <a href="mailto:hello@pitchshow.ai" class="btn-pill-primary gs-up" style="width:fit-content;margin-top:20px">
+        Talk to us
+        <i data-lucide="arrow-right" style="width:15px;height:15px"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Core Capabilities ── -->
+  <div class="pg-section">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="cpu" style="width:12px;height:12px"></i>Core capabilities</div>
+      <h2 class="section-h2 gs-card">Built for organizations where generic AI is a liability.</h2>
+      <p class="pg-lead gs-card">Every capability runs on your infrastructure, against your data, with your model selection. Nothing touches the public cloud unless you choose it.</p>
+
+      <div class="ent-cap-grid">
+
+        <div class="ent-cap gs-card">
+          <div class="ent-cap-icon"><i data-lucide="brain-circuit" style="width:22px;height:22px"></i></div>
+          <h3>Private LLM Evaluation &amp; Integration</h3>
+          <p>Run systematic comparisons of Qwen, DeepSeek, Llama, Baichuan, and other models against your actual use cases. We help you select the right model for your domain, then integrate it directly into PitchShow — so every generated slide is powered by AI that knows your language, your compliance requirements, and your internal terminology.</p>
+          <div class="ent-cap-tags"><span>Qwen / DeepSeek / Llama</span><span>On-premise inference</span><span>Model benchmarking</span></div>
+        </div>
+
+        <div class="ent-cap gs-card">
+          <div class="ent-cap-icon"><i data-lucide="database" style="width:22px;height:22px"></i></div>
+          <h3>Knowledge Base Integration</h3>
+          <p>Connect your internal document repositories, regulatory libraries, product databases, or HR manuals as the AI's primary information source. Every slide, every talking point, every exam question is grounded in your verified content — not hallucinated from the open internet. Supports RAG pipelines with your existing vector store (Milvus, pgvector, Elasticsearch).</p>
+          <div class="ent-cap-tags"><span>RAG pipeline</span><span>Document ingestion</span><span>Verified sourcing</span></div>
+        </div>
+
+        <div class="ent-cap gs-card">
+          <div class="ent-cap-icon"><i data-lucide="layers" style="width:22px;height:22px"></i></div>
+          <h3>Customized Output Formats</h3>
+          <p>Beyond slides: SCORM 2004 courseware, H5 interactive modules, structured digital human scripts, assessment question banks, and API-ready data packages — all in templates calibrated to your brand, regulatory format, and workflow. Output structures are configurable per department, per audience, per use case.</p>
+          <div class="ent-cap-tags"><span>SCORM 2004</span><span>H5 Interactive</span><span>API / Bulk generation</span></div>
+        </div>
+
+        <div class="ent-cap gs-card">
+          <div class="ent-cap-icon"><i data-lucide="clipboard-check" style="width:22px;height:22px"></i></div>
+          <h3>Post-training Exam &amp; Interaction</h3>
+          <p>After every training module, learners engage with AI-generated interactive assessments: adaptive multiple-choice, scenario-based decision trees, short-answer with AI scoring, and competency checks. Results feed back into LMS gradebooks via xAPI. Works for compliance certification, onboarding verification, and continuing education credits (CME, CPE).</p>
+          <div class="ent-cap-tags"><span>Adaptive testing</span><span>xAPI / LMS sync</span><span>AI scoring</span></div>
+        </div>
+
+        <div class="ent-cap gs-card">
+          <div class="ent-cap-icon"><i data-lucide="user-round-cog" style="width:22px;height:22px"></i></div>
+          <h3>Digital Human Training Pipeline</h3>
+          <p>PitchShow generates presenter scripts with precise segment timing, scene breakpoints, and visual cue markers — structured to feed directly into HeyGen, D-ID, or Synthesia. Build a library of video training modules featuring your brand avatar at a fraction of traditional production cost. The AI writes, the digital human presents, the learner watches and passes the exam — fully automated.</p>
+          <div class="ent-cap-tags"><span>HeyGen / D-ID / Synthesia</span><span>Script segmentation</span><span>Video pipeline</span></div>
+        </div>
+
+        <div class="ent-cap gs-card">
+          <div class="ent-cap-icon"><i data-lucide="workflow" style="width:22px;height:22px"></i></div>
+          <h3>Custom Information Processing Model</h3>
+          <p>For organizations with unique data structures — financial reporting formats, legal briefs, clinical case studies, government policy documents — we build custom extraction and synthesis pipelines. Raw data in, publication-ready presentation out. The processing model encodes your institutional knowledge so every output looks like it was authored by your best people.</p>
+          <div class="ent-cap-tags"><span>Custom pipeline</span><span>Data extraction</span><span>Template encoding</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Industry verticals ── -->
+  <div class="pg-section" style="background:var(--bg1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="building-2" style="width:12px;height:12px"></i>Industry verticals</div>
+      <h2 class="section-h2 gs-card">Where these capabilities matter most.</h2>
+
+      <div class="ent-industry-grid">
+
+        <div class="ent-ind gs-card">
+          <div class="ent-ind-icon"><i data-lucide="landmark" style="width:22px;height:22px"></i></div>
+          <h3>Finance &amp; Banking</h3>
+          <p>Board reports from proprietary trading data. Regulatory briefings that meet CSRC/SEC format. AI trained on your internal models — not general web data. Private LLM ensures no financial data leaves the perimeter.</p>
+          <div class="ent-ind-tags"><span>Private LLM</span><span>Knowledge Base</span><span>Compliance Format</span></div>
+        </div>
+
+        <div class="ent-ind gs-card">
+          <div class="ent-ind-icon"><i data-lucide="graduation-cap" style="width:22px;height:22px"></i></div>
+          <h3>EdTech &amp; Corporate Training</h3>
+          <p>Bulk SCORM courseware from curriculum. Post-training assessments with adaptive difficulty. Digital human trainer scripts ready for HeyGen or D-ID. 80% reduction in content production cost.</p>
+          <div class="ent-ind-tags"><span>SCORM Output</span><span>Digital Human</span><span>Assessment</span></div>
+        </div>
+
+        <div class="ent-ind gs-card">
+          <div class="ent-ind-icon"><i data-lucide="shield" style="width:22px;height:22px"></i></div>
+          <h3>Government &amp; SOE</h3>
+          <p>Fully air-gapped deployment for classified policy work. Internal regulations and strategic documents drive every output. Preparation time: 3 days compressed to 4 hours.</p>
+          <div class="ent-ind-tags"><span>Air-gapped</span><span>Knowledge Base</span><span>Policy Documents</span></div>
+        </div>
+
+        <div class="ent-ind gs-card">
+          <div class="ent-ind-icon"><i data-lucide="heart-pulse" style="width:22px;height:22px"></i></div>
+          <h3>Healthcare</h3>
+          <p>Clinical training from de-identified patient data. SCORM for CME credits. Interactive case studies with knowledge checks. HIPAA-compliant, zero data egress, AI-scored competency assessments.</p>
+          <div class="ent-ind-tags"><span>HIPAA Compliant</span><span>Interactive Exam</span><span>CME Credits</span></div>
+        </div>
+
+        <div class="ent-ind gs-card">
+          <div class="ent-ind-icon"><i data-lucide="factory" style="width:22px;height:22px"></i></div>
+          <h3>Manufacturing &amp; Industry</h3>
+          <p>Equipment manuals from MES/ERP data. Safety training with scenario assessments. Digital human technician guides that walk workers through procedures step-by-step. Onboarding: 4 weeks → 1 week.</p>
+          <div class="ent-ind-tags"><span>MES Integration</span><span>Digital Human</span><span>Procedure Guides</span></div>
+        </div>
+
+        <div class="ent-ind gs-card">
+          <div class="ent-ind-icon"><i data-lucide="scale" style="width:22px;height:22px"></i></div>
+          <h3>Legal &amp; Professional Services</h3>
+          <p>Brief and memo templates from precedent databases. Client presentation packages from case records. Training modules for associates with interactive scenario simulations grounded in your practice area knowledge.</p>
+          <div class="ent-ind-tags"><span>Precedent Database</span><span>Case Records</span><span>Scenario Sim</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Contact CTA ── -->
+  <div class="pg-section">
+    <div class="pg-wrap">
+      <div class="ent-contact gs-card">
+        <div class="ent-contact-left">
+          <h3>Ready to discuss your requirements?</h3>
+          <p>We work with a limited number of enterprise clients to ensure quality deployment. Tell us your industry, data environment, and use case — we'll come back with a concrete proposal within 24 hours.</p>
+        </div>
+        <div class="ent-contact-right">
+          <a href="mailto:hello@pitchshow.ai" class="btn-pill-primary">
+            <i data-lucide="mail" style="width:15px;height:15px"></i>
+            hello@pitchshow.ai
+          </a>
+          <p style="font-size:12px;color:var(--tx3);margin-top:8px;text-align:center">We respond within 24 hours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="vendor/lucide.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

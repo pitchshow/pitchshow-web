@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PitchShow — Pitch an idea. Walk out with a show.</title>
+<meta name="description" content="PitchShow AI researches, builds, and delivers the complete presentation — narrative, animations, script, and a live URL. In minutes."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── override: hide old sidebar nav, remove offset ── */
+.ps-topbar { display:none!important; }
+.sidebar   { display:none!important; }
+.main      { margin-left:0!important; }
+.hero      { padding-top:28px; }
+
+/* ── V2 Floating Topnav ── */
+.v2nav {
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:60px;display:flex;align-items:center;padding:0 48px;
+  transition:top .45s,left .45s,right .45s,height .45s,padding .45s,
+             border-radius .45s,background .45s,box-shadow .45s;
+}
+.v2nav.scrolled {
+  top:10px;left:8%;right:8%;height:48px;padding:0 22px;
+  border-radius:9999px;background:rgba(12,12,28,.9);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 32px rgba(0,0,0,.45);
+}
+.v2nav-logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#fff;text-decoration:none}
+.v2nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.v2nav-lnk{padding:6px 13px;font-size:14px;font-weight:500;color:rgba(255,255,255,.55);border-radius:8px;transition:color .2s;text-decoration:none}
+.v2nav-lnk:hover{color:#fff}
+.v2nav-cta{margin-left:8px;padding:8px 20px;background:#fff;color:#0c0c1a;border-radius:9999px;font-size:14px;font-weight:700;transition:opacity .2s;text-decoration:none}
+.v2nav-cta:hover{opacity:.85}
+
+/* ── Rainbow "Get started free" button ── */
+.btn-rainbow-hero {
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:9999px;
+  font-size:15px;font-weight:700;color:#fff;
+  background:#0c0c1a;isolation:isolate;overflow:hidden;
+  text-decoration:none;
+}
+.btn-rainbow-hero::before{
+  content:'';position:absolute;width:250%;height:250%;top:-75%;left:-75%;
+  background:conic-gradient(from 0deg,#ff6b6b,#ffa040,#ffd700,#90ee90,#87ceeb,#a070db,#ff6b6b);
+  animation:rh-spin 3s linear infinite;z-index:-1;
+}
+.btn-rainbow-hero::after{
+  content:'';position:absolute;inset:2px;background:#0c0c1a;
+  border-radius:9999px;z-index:-1;
+}
+@keyframes rh-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ── M3 dual-column features (replaces feat-section) ── */
+.feat-m3-wrap{display:grid;grid-template-columns:40% 60%;max-width:1360px;margin:0 auto;padding:0 80px;align-items:start}
+.feat-m3-left{padding:60px 64px 140px 0}
+.feat-m3-section{
+  min-height:88vh;display:flex;flex-direction:column;justify-content:center;
+  padding:60px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  transition:opacity .5s;
+}
+.feat-m3-section:last-child{border-bottom:none}
+.feat-m3-section:not(.on){opacity:.28}
+.feat-m3-num{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--acc,#a78bfa);margin-bottom:16px;
+  opacity:0;transition:opacity .5s;
+}
+.feat-m3-section.on .feat-m3-num{opacity:1}
+.feat-m3-kicker{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:rgba(255,255,255,.4);margin-bottom:14px;
+}
+.feat-m3-h{font-size:clamp(24px,2.8vw,38px);font-weight:700;line-height:1.15;margin-bottom:16px}
+.feat-m3-p{font-size:16px;color:rgba(255,255,255,.52);line-height:1.75;max-width:420px;margin-bottom:20px}
+.feat-m3-pts{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.feat-m3-pts li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:rgba(255,255,255,.45)}
+.feat-m3-pts li::before{content:'✓';color:var(--acc,#a78bfa);font-weight:700;flex-shrink:0;margin-top:1px}
+.feat-m3-moat{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  padding:5px 12px;border-radius:9999px;font-size:12px;font-weight:600;
+  background:rgba(123,92,246,.12);border:1px solid rgba(123,92,246,.25);
+  color:#a78bfa;
+}
+/* right sticky panel */
+.feat-m3-right{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 0 40px 24px}
+.feat-m3-panels{position:relative;width:100%;max-width:805px;aspect-ratio:4/3}
+.fmp-video-wrap{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;aspect-ratio:unset!important}
+.feat-m3-panels video[src=""]{display:none!important}
+.feat-m3-panel{
+  position:absolute;inset:0;border-radius:18px;overflow:hidden;
+  opacity:0;transform:translateY(22px) scale(.97);
+  transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.feat-m3-panel.on{opacity:1;transform:none;pointer-events:auto}
+.fmp-video-wrap{width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 64px rgba(0,0,0,.5);position:relative}
+.fmp-video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fmp-ph{position:absolute;inset:0;display:flex;flex-direction:column;padding:28px;pointer-events:none}
+.fmp-bg{position:absolute;inset:0}
+.fmp-ct{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column}
+.fmp-ck{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+.fmp-ti{font-size:20px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:auto}
+.fmp-bars{display:flex;gap:6px;align-items:flex-end;height:56px;margin-top:20px}
+.fmp-bar{flex:1;border-radius:4px 4px 0 0;opacity:.7}
+.fmp-note{
+  position:absolute;bottom:14px;left:14px;right:14px;
+  display:flex;align-items:center;gap:8px;padding:9px 13px;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.1);border-radius:11px;
+  font-size:12px;color:rgba(255,255,255,.6);
+}
+.fmp-nd{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+/* panel bg colours */
+.pbg-0{background:linear-gradient(135deg,#0a0818,#14103a,#080612)}
+.pbg-1{background:linear-gradient(135deg,#0a1208,#162014,#080e08)}
+.pbg-2{background:linear-gradient(135deg,#180808,#281010,#100806)}
+.pbg-3{background:linear-gradient(135deg,#060c18,#0c1828,#060a14)}
+.pbg-4{background:linear-gradient(135deg,#120a06,#201408,#0c0806)}
+.pbg-5{background:linear-gradient(135deg,#0e0620,#1c1038,#0a0618)}
+/* scan animation */
+.fmp-scan{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.fmp-scan-row{height:8px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;position:relative}
+.fmp-scan-row::after{content:'';position:absolute;inset:0;border-radius:4px;transform:scaleX(0);transform-origin:left;animation:fmp-fill 2s ease forwards;animation-play-state:paused}
+.feat-m3-panel.on .fmp-scan-row::after{animation-play-state:running}
+.fmp-scan-row:nth-child(1)::after{animation-delay:.1s}
+.fmp-scan-row:nth-child(2)::after{animation-delay:.4s}
+.fmp-scan-row:nth-child(3)::after{animation-delay:.7s}
+.fmp-scan-row:nth-child(4)::after{animation-delay:1.0s}
+@keyframes fmp-fill{to{transform:scaleX(1)}}
+
+/* ── Video placeholder ── */
+.video-placeholder{position:relative;width:100%;max-width:1248px;margin:0 auto;border-radius:16px;overflow:hidden;background:#0d0818;border:1px solid rgba(255,255,255,.08);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 1px rgba(123,92,246,.12) inset}
+.video-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 60%,rgba(123,92,246,.18) 0%,transparent 70%)}
+.vp-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:20px}
+.vp-play{width:72px;height:72px;border-radius:50%;background:rgba(123,92,246,.2);border:2px solid rgba(123,92,246,.4);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+.vp-play svg{width:28px;height:28px;fill:rgba(255,255,255,.7);margin-left:4px}
+.vp-label{font-size:14px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.vp-corners span{position:absolute;width:20px;height:20px;border-color:rgba(123,92,246,.4);border-style:solid}
+.vp-corners span:nth-child(1){top:18px;left:18px;border-width:2px 0 0 2px}
+.vp-corners span:nth-child(2){top:18px;right:18px;border-width:2px 2px 0 0}
+.vp-corners span:nth-child(3){bottom:18px;left:18px;border-width:0 0 2px 2px}
+.vp-corners span:nth-child(4){bottom:18px;right:18px;border-width:0 2px 2px 0}
+
+/* ── Why PitchShow bento (replaces fg-section) ── */
+.why-section{padding:100px 0 120px}
+.why-header{margin-bottom:52px}
+.why-eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--acc,#a78bfa);margin-bottom:12px}
+.why-h2{font-size:clamp(26px,4vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;max-width:540px}
+.why-sub{font-size:16px;color:var(--tx2,rgba(255,255,255,.5));max-width:480px;margin-top:12px;line-height:1.65}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.why-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:40px;overflow:hidden}
+.why-card-tall{grid-row:span 2}
+.why-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;background:rgba(123,92,246,.15);color:#a78bfa;border:1px solid rgba(123,92,246,.25);margin-bottom:18px}
+.why-h{font-size:20px;font-weight:700;margin-bottom:8px}
+.why-p{font-size:14px;color:rgba(255,255,255,.52);line-height:1.65}
+.why-vp{margin-bottom:24px;background:linear-gradient(135deg,#0e0820,#16102e);border-radius:14px;border:1px solid rgba(123,92,246,.2);padding:20px;aspect-ratio:16/10;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.wyp-ck{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a78bfa;margin-bottom:7px}
+.wyp-ti{font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.25}
+.wyp-brs{display:flex;gap:5px;align-items:flex-end;height:34px}
+.wyp-br{flex:1;border-radius:3px 3px 0 0;background:rgba(123,92,246,.5)}
+.wyp-ann{position:absolute;bottom:10px;left:10px;right:10px;display:flex;align-items:center;gap:6px;padding:6px 9px;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);border:1px solid rgba(123,92,246,.22);border-radius:8px;font-size:10px;color:rgba(255,255,255,.6)}
+.wyp-dot{width:7px;height:7px;border-radius:50%;background:#a78bfa;flex-shrink:0}
+.why-model-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.why-mc{padding:6px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9999px;font-size:13px;font-weight:500;color:rgba(255,255,255,.65)}
+.why-share-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.why-sp{padding:7px 16px;border:1.5px solid rgba(255,255,255,.15);border-radius:9999px;font-size:13px;font-weight:600;color:rgba(255,255,255,.7)}
+
+/* ── Try it now (replaces section-dl) ── */
+.try-now{position:relative;overflow:hidden;padding:100px 0 100px}
+.try-aurora{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 2s ease}
+.try-aurora.vis{opacity:1}
+.try-aurora-inner{position:absolute;inset:0;filter:blur(70px)}
+.ta-blob{position:absolute;border-radius:50%}
+@keyframes ta-drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-3%,-5%) scale(1.05)}66%{transform:translate(3%,4%) scale(.97)}}
+.ta1{width:70%;height:400px;background:radial-gradient(circle,rgba(123,92,246,.55) 0%,transparent 65%);bottom:-120px;left:15%;animation:ta-drift 10s ease-in-out infinite}
+.ta2{width:80%;height:310px;background:radial-gradient(circle,rgba(248,103,47,.35) 0%,transparent 65%);bottom:0;left:5%;animation:ta-drift 13s ease-in-out infinite reverse}
+.ta3{width:45%;height:270px;background:radial-gradient(circle,rgba(167,139,250,.45) 0%,transparent 65%);top:80px;left:30%;animation:ta-drift 8s ease-in-out infinite 2s}
+.try-content{position:relative;z-index:2;max-width:912px;margin:0 auto;padding:0 40px;text-align:center}
+.try-peach{display:flex;justify-content:center;margin-bottom:22px}
+.try-h2{font-size:clamp(26px,4vw,48px);font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
+.try-sub{font-size:17px;color:rgba(255,255,255,.5);margin-bottom:40px}
+.try-tabs{display:flex;gap:4px;justify-content:center;margin-bottom:28px}
+.try-tab{display:flex;align-items:center;gap:7px;padding:9px 20px;border-radius:9999px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.45);transition:background .25s,color .25s,border-color .25s}
+.try-tab.on{background:rgba(123,92,246,.2);border-color:rgba(123,92,246,.5);color:#a78bfa}
+.try-tab:hover:not(.on){background:rgba(255,255,255,.07);color:rgba(255,255,255,.7)}
+.try-panel{display:none}
+.try-panel.on{display:block}
+/* prompt box — scoped to try-now */
+.try-now .tpb{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:20px 20px 14px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:border-color .25s,box-shadow .25s;text-align:left}
+.try-now .tpb:focus-within{border-color:rgba(123,92,246,.4);box-shadow:0 0 0 1px rgba(123,92,246,.1),0 8px 40px rgba(0,0,0,.4)}
+.try-now .tpta{width:100%;min-height:76px;max-height:180px;background:transparent;border:none;outline:none;resize:none;font-family:inherit;font-size:16px;color:rgba(255,255,255,.88);line-height:1.6;caret-color:#a78bfa}
+.try-now .tpta::placeholder{color:rgba(255,255,255,.28)}
+.try-now .tpfoot{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)}
+.try-now .tpplus{width:32px;height:32px;border-radius:9999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .2s}
+.try-now .tpplus:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
+.try-now .tppills{display:flex;gap:4px}
+.try-now .tppill{padding:5px 12px;border-radius:9999px;font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:inherit;background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);display:flex;align-items:center;gap:4px;transition:background .2s,color .2s}
+.try-now .tppill.on{background:rgba(123,92,246,.2);color:#a78bfa;border:1px solid rgba(123,92,246,.3)}
+.try-now .tppill:hover:not(.on){background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.try-now .tpmodel{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:9999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;margin-left:auto}
+.try-now .tpsend{width:34px;height:34px;border-radius:9999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s,transform .15s}
+.try-now .tpsend.ready{background:#7B5CF6;border-color:#7B5CF6;color:#fff}
+.try-now .tpsend.ready:hover{transform:scale(1.08)}
+.try-now .tpchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.try-now .tpchip{padding:7px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9999px;font-size:13px;color:rgba(255,255,255,.4);cursor:pointer;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
+.try-now .tpchip:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)}
+.try-now .tpnote{font-size:13px;color:rgba(255,255,255,.28);margin-top:16px}
+/* ── Pricing teaser (home page compact) ── */
+.price-teaser-row{display:flex;gap:16px;justify-content:center;margin:40px 0 28px;flex-wrap:wrap}
+.pt-card{flex:1;min-width:220px;max-width:280px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s}
+.pt-card:hover{border-color:rgba(255,255,255,.16)}
+.pt-card-feat{border-color:rgba(123,92,246,.35);background:rgba(123,92,246,.07);position:relative}
+.pt-card-feat:hover{border-color:rgba(123,92,246,.6)}
+.pt-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#7B5CF6,#9B6DFF);color:#fff;font-size:11px;font-weight:600;padding:3px 12px;border-radius:100px;white-space:nowrap}
+.pt-tier{font-size:13px;color:rgba(255,255,255,.45);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.pt-price{font-size:36px;font-weight:700;color:#fff;line-height:1.1}
+.pt-price span{font-size:16px;font-weight:400;color:rgba(255,255,255,.4)}
+.pt-note{font-size:12px;color:rgba(255,255,255,.35);flex:1}
+.pt-full-link{font-size:14px;color:rgba(123,92,246,.8);text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:4px}
+.pt-full-link:hover{color:#9B6DFF}
+/* coming soon badges */
+.cs-badge{display:block;font-size:10px;color:rgba(255,255,255,.3);margin-top:5px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+.cs-note{font-size:10px;color:rgba(255,255,255,.28);margin-left:6px;letter-spacing:.04em}
+.sb-login{position:relative}
+.sb-login .cs-tip{display:none;position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);background:rgba(20,10,30,.95);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:4px 10px;font-size:11px;color:rgba(255,255,255,.5);white-space:nowrap}
+.sb-login:hover .cs-tip{display:block}
+.f-soc a{opacity:.5;transition:opacity .2s;font-size:11px;text-decoration:none;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:4px}
+.f-soc a:hover{opacity:1}
+/* email capture */
+.try-now .tel-layer{display:none;flex-direction:column;gap:12px;text-align:left}
+.try-now .tel-layer.vis{display:flex}
+.try-now .tel-prev{font-size:13px;color:rgba(255,255,255,.35);font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.try-now .tel-msg{font-size:16px;font-weight:600;color:rgba(255,255,255,.85)}
+.try-now .tel-row{display:flex;gap:8px}
+.try-now .tel-in{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:9999px;padding:10px 18px;font-family:inherit;font-size:14px;color:#fff;outline:none}
+.try-now .tel-in::placeholder{color:rgba(255,255,255,.3)}
+.try-now .tel-in:focus{border-color:rgba(123,92,246,.5)}
+.try-now .tel-sub{padding:10px 22px;background:#7B5CF6;color:#fff;border-radius:9999px;border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.try-now .tel-sub:hover{opacity:.8}
+.try-now .tel-ok{display:none;font-size:15px;color:rgba(255,255,255,.6);text-align:center;padding:8px 0}
+/* Desktop / MCP tabs */
+.try-dl-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:44px;text-align:center}
+.try-dl-icon{font-size:40px;margin-bottom:18px}
+.try-dl-h{font-size:22px;font-weight:700;margin-bottom:10px}
+.try-dl-p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:26px;line-height:1.6}
+.try-btn-dl{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;background:#fff;color:#0c0c1a;border-radius:9999px;font-size:15px;font-weight:700;transition:opacity .2s;text-decoration:none}
+.try-btn-dl:hover{opacity:.85}
+.try-dl-note{font-size:12px;color:rgba(255,255,255,.28);margin-top:14px}
+.try-mcp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px;text-align:left}
+.try-mcp-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:14px}
+.try-code{background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#a78bfa;line-height:1.6;margin-bottom:14px;overflow-x:auto}
+.try-mcp-p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65}
+/* mdot animation */
+.mdot-p{width:7px;height:7px;border-radius:50%;background:#a78bfa}
+
+/* ── Why Grid V2 — 9-card bento ── */
+.why-grid-v2{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+.wgc{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:28px;overflow:hidden;position:relative;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .55s ease,transform .55s ease,border-color .3s,box-shadow .3s;
+}
+.wgc.vis{opacity:1;transform:translateY(0)}
+.wgc:hover{transform:translateY(-4px) scale(1.008)!important;border-color:rgba(255,255,255,.16);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+/* column spans */
+.wgc-s7{grid-column:span 7}
+.wgc-s5{grid-column:span 5}
+.wgc-s3{grid-column:span 3}
+.wgc-s4{grid-column:span 4}
+/* staggered reveal delays */
+.wgc:nth-child(1){transition-delay:.00s}
+.wgc:nth-child(2){transition-delay:.10s}
+.wgc:nth-child(3){transition-delay:.00s}
+.wgc:nth-child(4){transition-delay:.10s}
+.wgc:nth-child(5){transition-delay:.20s}
+.wgc:nth-child(6){transition-delay:.00s}
+.wgc:nth-child(7){transition-delay:.09s}
+.wgc:nth-child(8){transition-delay:.18s}
+.wgc:nth-child(9){transition-delay:.27s}
+/* shared card typography */
+.wgc-tag{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.wgc-h3{font-size:16px;font-weight:700;margin-bottom:6px;color:#fff;line-height:1.3}
+.wgc-p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.62}
+
+/* ─ Rehearsal: slide timing bars ─ */
+.wgc-timer{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+.wgc-timer-n{font-size:48px;font-weight:800;color:rgba(255,255,255,.95);line-height:1;letter-spacing:-.03em}
+.wgc-timer-meta{display:flex;flex-direction:column}
+.wgc-timer-l{font-size:13px;color:rgba(255,255,255,.35);font-weight:500}
+.wgc-timer-s{font-size:11px;color:rgba(255,255,255,.2);margin-top:2px}
+.wgc-slide-rows{display:flex;flex-direction:column;gap:5px}
+.wgc-slide-r{display:flex;align-items:center;gap:8px;border-radius:6px;padding:2px 0}
+.wgc-slide-rn{font-size:10px;color:rgba(255,255,255,.25);width:14px;text-align:right;flex-shrink:0}
+.wgc-slide-rt{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+.wgc-slide-rf{height:100%;border-radius:99px;transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.4,0,.2,1)}
+.wgc.vis .wgc-slide-rf{transform:scaleX(1)}
+.wgc-slide-rs{font-size:10px;color:rgba(255,255,255,.22);width:34px;flex-shrink:0}
+
+/* ─ Q&A: question items ─ */
+.wgc-qa-list{display:flex;flex-direction:column;gap:7px;margin-bottom:4px}
+.wgc-qa-item{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:10px 12px;background:rgba(255,255,255,.04);
+  border-radius:10px;border:1px solid rgba(255,255,255,.06);
+  font-size:13px;color:rgba(255,255,255,.6);line-height:1.45;
+  opacity:0;transform:translateX(-10px);
+  transition:opacity .4s ease,transform .4s ease;
+}
+.wgc-qa-icon{color:#f472b6;font-size:14px;font-weight:700;flex-shrink:0;margin-top:1px}
+.wgc.vis .wgc-qa-item:nth-child(1){opacity:1;transform:none;transition-delay:.10s}
+.wgc.vis .wgc-qa-item:nth-child(2){opacity:1;transform:none;transition-delay:.28s}
+.wgc.vis .wgc-qa-item:nth-child(3){opacity:1;transform:none;transition-delay:.46s}
+
+/* ─ Brand Kit: swatches ─ */
+.wgc-swatches{display:flex;gap:8px;margin-bottom:10px}
+.wgc-swatch{width:30px;height:30px;border-radius:8px;transform:scale(0);transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.wgc.vis .wgc-swatch:nth-child(1){transform:scale(1);transition-delay:.04s}
+.wgc.vis .wgc-swatch:nth-child(2){transform:scale(1);transition-delay:.14s}
+.wgc.vis .wgc-swatch:nth-child(3){transform:scale(1);transition-delay:.24s}
+.wgc.vis .wgc-swatch:nth-child(4){transform:scale(1);transition-delay:.34s}
+.wgc.vis .wgc-swatch:nth-child(5){transform:scale(1);transition-delay:.44s}
+.wgc-font-chip{display:inline-block;padding:2px 8px;background:rgba(255,255,255,.06);border-radius:99px;font-size:11px;color:rgba(255,255,255,.35);margin-bottom:12px}
+
+/* ─ Narrative Arc: SVG path draw ─ */
+.wgc-arc-svg{width:100%;height:56px;margin-bottom:6px}
+.wgc-arc-path{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:380;stroke-dashoffset:380;transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1) .15s}
+.wgc.vis .wgc-arc-path{stroke-dashoffset:0}
+.wgc-arc-beats{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.28);margin-bottom:14px}
+
+/* ─ Video Call: window mock ─ */
+.wgc-vcall-win{background:#111;border-radius:10px;overflow:hidden;margin-bottom:14px;border:1px solid rgba(255,255,255,.08)}
+.wgc-vcall-bar{background:#1a1a1a;padding:7px 10px;display:flex;align-items:center;gap:5px}
+.wgc-vcall-dots{display:flex;gap:4px}
+.wgc-vcall-dot{width:8px;height:8px;border-radius:50%}
+.wgc-vcall-title{font-size:10px;color:rgba(255,255,255,.28);margin-left:6px}
+.wgc-vcall-body{padding:12px;display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5)}
+.wgc-vcall-live{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:dot-pulse 1.5s ease-in-out infinite;flex-shrink:0}
+
+/* ─ 9 Styles: dot grid ─ */
+.wgc-style-dots{display:grid;grid-template-columns:repeat(3,28px);gap:6px;margin-bottom:14px}
+.wgc-style-dot{width:28px;height:28px;border-radius:8px;transform:scale(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.wgc-style-dot:nth-child(1){background:linear-gradient(135deg,#7b5cf6,#4338ca)}
+.wgc-style-dot:nth-child(2){background:linear-gradient(135deg,#f59e0b,#d97706)}
+.wgc-style-dot:nth-child(3){background:linear-gradient(135deg,#10b981,#059669)}
+.wgc-style-dot:nth-child(4){background:linear-gradient(135deg,#ef4444,#dc2626)}
+.wgc-style-dot:nth-child(5){background:linear-gradient(135deg,#06b6d4,#0891b2)}
+.wgc-style-dot:nth-child(6){background:linear-gradient(135deg,#f97316,#ea580c)}
+.wgc-style-dot:nth-child(7){background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
+.wgc-style-dot:nth-child(8){background:linear-gradient(135deg,#ec4899,#db2777)}
+.wgc-style-dot:nth-child(9){background:linear-gradient(135deg,#6366f1,#4f46e5)}
+.wgc.vis .wgc-style-dot:nth-child(1){transform:scale(1);transition-delay:.04s}
+.wgc.vis .wgc-style-dot:nth-child(2){transform:scale(1);transition-delay:.10s}
+.wgc.vis .wgc-style-dot:nth-child(3){transform:scale(1);transition-delay:.16s}
+.wgc.vis .wgc-style-dot:nth-child(4){transform:scale(1);transition-delay:.22s}
+.wgc.vis .wgc-style-dot:nth-child(5){transform:scale(1);transition-delay:.28s}
+.wgc.vis .wgc-style-dot:nth-child(6){transform:scale(1);transition-delay:.34s}
+.wgc.vis .wgc-style-dot:nth-child(7){transform:scale(1);transition-delay:.40s}
+.wgc.vis .wgc-style-dot:nth-child(8){transform:scale(1);transition-delay:.46s}
+.wgc.vis .wgc-style-dot:nth-child(9){transform:scale(1);transition-delay:.52s}
+
+/* ─ MCP: code line ─ */
+.wgc-code-line{font-family:'JetBrains Mono',monospace;font-size:12px;padding:11px 14px;background:rgba(0,0,0,.4);border-radius:8px;border:1px solid rgba(255,255,255,.07);margin-bottom:14px;color:#a78bfa;overflow:hidden;white-space:nowrap}
+.wgc-code-cursor{display:inline-block;width:1px;height:1em;background:#a78bfa;margin-left:2px;vertical-align:-.1em;animation:blink 1s step-end infinite}
+
+/* ─ 7 Exports: pills ─ */
+.wgc-export-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.wgc-export-pill{padding:4px 10px;border-radius:9999px;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);opacity:0;transform:scale(.8);transition:opacity .3s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.wgc.vis .wgc-export-pill:nth-child(1){opacity:1;transform:scale(1);transition-delay:.06s}
+.wgc.vis .wgc-export-pill:nth-child(2){opacity:1;transform:scale(1);transition-delay:.14s}
+.wgc.vis .wgc-export-pill:nth-child(3){opacity:1;transform:scale(1);transition-delay:.22s}
+.wgc.vis .wgc-export-pill:nth-child(4){opacity:1;transform:scale(1);transition-delay:.30s}
+.wgc.vis .wgc-export-pill:nth-child(5){opacity:1;transform:scale(1);transition-delay:.38s}
+.wgc.vis .wgc-export-pill:nth-child(6){opacity:1;transform:scale(1);transition-delay:.46s}
+.wgc.vis .wgc-export-pill:nth-child(7){opacity:1;transform:scale(1);transition-delay:.54s}
+
+/* ─ Audience Brief: doc lines ─ */
+.wgc-doc-lines{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.wgc-doc-line{height:7px;border-radius:4px;background:rgba(255,255,255,.08);transform-origin:left;transform:scaleX(0);transition:transform .65s ease}
+.wgc.vis .wgc-doc-line:nth-child(1){transform:scaleX(1);transition-delay:.04s}
+.wgc.vis .wgc-doc-line:nth-child(2){transform:scaleX(1);transition-delay:.16s}
+.wgc.vis .wgc-doc-line:nth-child(3){transform:scaleX(1);transition-delay:.28s}
+.wgc.vis .wgc-doc-line:nth-child(4){transform:scaleX(1);transition-delay:.40s}
+.wgc.vis .wgc-doc-line:nth-child(5){transform:scaleX(1);transition-delay:.52s}
+
+/* ══════════════════════════════════
+   MOBILE RESPONSIVE
+══════════════════════════════════ */
+
+/* ── Mobile nav hamburger ── */
+.v2nav-hamburger{
+  display:none;margin-left:auto;flex-shrink:0;
+  /* padding builds the 44px tap target more reliably than width/height */
+  padding:12px;
+  border-radius:10px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  align-items:center;justify-content:center;
+  cursor:pointer;color:rgba(255,255,255,.85);
+  transition:background .15s,color .15s;
+  line-height:0; /* prevent baseline gap below SVG */
+  /* prevent double-tap zoom interference on iOS/Android */
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.v2nav-hamburger:hover{background:rgba(255,255,255,.14);color:#fff}
+.v2nav-hamburger:active{background:rgba(255,255,255,.2)}
+.v2nav-mobile{
+  position:fixed;top:60px;left:0;right:0;z-index:298;
+  background:rgba(10,10,18,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:12px 16px 20px;
+  display:flex;flex-direction:column;gap:2px;
+  transform:translateY(-10px);opacity:0;pointer-events:none;
+  transition:transform .25s cubic-bezier(.65,0,.35,1),opacity .25s cubic-bezier(.65,0,.35,1);
+}
+.v2nav-mobile.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.v2nm-lnk{
+  display:block;padding:13px 16px;
+  font-size:16px;font-weight:500;color:rgba(255,255,255,.65);
+  border-radius:10px;text-decoration:none;
+  transition:background .15s,color .15s;
+}
+.v2nm-lnk:hover{background:rgba(255,255,255,.06);color:#fff}
+.v2nm-div{height:1px;background:rgba(255,255,255,.07);margin:6px 0}
+.v2nm-cta{
+  display:block;margin-top:4px;padding:13px;
+  background:#fff;color:#0c0c1a;border-radius:9999px;
+  font-size:15px;font-weight:700;text-align:center;text-decoration:none;
+  transition:opacity .2s;
+}
+.v2nm-cta:hover{opacity:.85}
+
+@media(max-width:768px){
+  .v2nav-links{display:none}
+  .v2nav-hamburger{display:flex}
+  .v2nav{padding:0 20px}
+  .v2nav.scrolled{left:3%;right:3%;padding:0 16px}
+}
+
+/* ── M3 Features: stack on mobile, remove sticky ── */
+@media(max-width:900px){
+  .feat-m3-wrap{grid-template-columns:1fr;padding:0 32px}
+  .feat-m3-left{padding:48px 0 32px}
+  .feat-m3-section{min-height:auto;padding:28px 0;opacity:1!important}
+  .feat-m3-section:not(.on){opacity:1!important}
+  .feat-m3-num{opacity:1!important}
+  .feat-m3-right{display:none} /* sticky visual panel → hidden on mobile */
+}
+@media(max-width:480px){
+  .feat-m3-wrap{padding:0 16px}
+  .feat-m3-h{font-size:clamp(22px,6.5vw,34px)!important}
+  .feat-m3-p{font-size:15px!important}
+}
+
+/* ── Why bento: single column on mobile ── */
+@media(max-width:768px){
+  .why-grid-v2{grid-template-columns:1fr}
+  .wgc-s7,.wgc-s5,.wgc-s3,.wgc-s4{grid-column:span 1}
+  .why-grid{grid-template-columns:1fr}
+  .why-card-tall{grid-row:span 1}
+  .why-section{padding:60px 0 80px}
+}
+
+/* ── Try-now: tighten on mobile ── */
+@media(max-width:480px){
+  .try-content{padding:0 16px}
+  .try-tabs{flex-wrap:wrap}
+  .try-now .tpfoot{flex-wrap:wrap;gap:6px}
+  .try-now .tpmodel{margin-left:0;order:5}
+  .try-now .tppills{flex-wrap:wrap}
+  .try-dl-card,.try-mcp-card{padding:28px 20px}
+}
+
+/* ── Hero: tighter on small screens ── */
+@media(max-width:480px){
+  .hero{padding:56px 16px 0!important}
+  .hero-product{padding:0 0 40px!important}
+  .hero-body{font-size:15px!important}
+}
+
+/* ── Pricing teaser: stack on mobile ── */
+@media(max-width:480px){
+  .price-teaser-row{flex-direction:column;align-items:stretch}
+  .pt-card{max-width:100%}
+}
+
+/* ── Mobile desktop notice ── */
+.mobile-notice{
+  display:none; /* hidden on desktop */
+  align-items:center;gap:10px;
+  margin:0 auto 24px;
+  padding:12px 16px;
+  background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);
+  border-radius:12px;max-width:480px;
+  font-size:13px;color:rgba(255,255,255,.6);line-height:1.5;
+  text-align:left;
+}
+.mobile-notice svg{color:#a78bfa;flex-shrink:0}
+.mobile-notice strong{color:rgba(255,255,255,.85);font-weight:600}
+@media(max-width:768px){
+  .mobile-notice{display:flex}
+}
+</style>
+</head>
+<body>
+<!-- ── Shared SVG defs: PitchShow peach gradient (v4 final) ── -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad-tb" cx="40%" cy="28%" r="62%">
+      <stop offset="0%"   stop-color="#FFF9F4"/>
+      <stop offset="52%"  stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<!-- ── V2 Floating Topnav ── -->
+<header class="v2nav" id="v2nav">
+  <a href="./index.html" class="v2nav-logo">
+    <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+      <defs><radialGradient id="ng" cx="40%" cy="28%" r="62%"><stop offset="0%" stop-color="#FFF9F4"/><stop offset="52%" stop-color="#FFE8D8"/><stop offset="100%" stop-color="#FFD0BA"/></radialGradient></defs>
+      <path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z" fill="url(#ng)"/>
+      <ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#3d6428" transform="rotate(20 27.5 9.5)"/>
+      <path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#5a3818" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <circle cx="16" cy="27" r="2.2" fill="#1a0810"/>
+      <circle cx="32" cy="27" r="2.2" fill="#1a0810"/>
+    </svg>
+    PitchShow
+  </a>
+  <nav class="v2nav-links">
+    <a href="./styles.html"    class="v2nav-lnk">Styles</a>
+    <a href="./pricing.html"   class="v2nav-lnk">Pricing</a>
+    <a href="./docs.html"      class="v2nav-lnk">Docs</a>
+    <a href="./blog.html"      class="v2nav-lnk">Blog</a>
+    <a href="./community.html" class="v2nav-lnk">Community</a>
+    <a href="#try-now"         class="v2nav-cta">Get started</a>
+  </nav>
+  <button class="v2nav-hamburger" id="v2Hamburger" aria-label="Open menu" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</header>
+
+<!-- Mobile nav menu -->
+<nav class="v2nav-mobile" id="v2MobileMenu" aria-hidden="true">
+  <a href="./styles.html"    class="v2nm-lnk">Styles</a>
+  <a href="./pricing.html"   class="v2nm-lnk">Pricing</a>
+  <a href="./docs.html"      class="v2nm-lnk">Docs</a>
+  <a href="./blog.html"      class="v2nm-lnk">Blog</a>
+  <a href="./community.html" class="v2nm-lnk">Community</a>
+  <div class="v2nm-div"></div>
+  <a href="#try-now"         class="v2nm-cta">Get started free</a>
+</nav>
+
+<!-- ── Shared SVG defs (gradient used in body) ── -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad" cx="40%" cy="28%" r="62%" gradientUnits="userSpaceOnUse"
+                    x1="0" y1="0" x2="48" y2="48">
+      <stop offset="0%"   stop-color="#FFF9F4"/>
+      <stop offset="52%"  stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<!-- ══════════════════════════════════
+     LEFT SIDEBAR (M3 style)
+══════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+
+  <!-- Search -->
+  <button class="sb-search" id="sbSearch" title="Search (⌘K)" aria-label="Search">
+    <i data-lucide="search"></i>
+  </button>
+
+  <!-- Primary nav -->
+  <nav class="sb-nav">
+    <a href="./index.html" class="sb-item active" title="Home">
+      <div class="sb-icon"><i data-lucide="home"></i></div>
+      <span class="sb-label">Home</span>
+    </a>
+    <a href="./get-started.html" class="sb-item" title="Get started">
+      <div class="sb-icon"><i data-lucide="rocket"></i></div>
+      <span class="sb-label">Start</span>
+    </a>
+    <a href="./styles.html" class="sb-item" title="Styles">
+      <div class="sb-icon"><i data-lucide="palette"></i></div>
+      <span class="sb-label">Styles</span>
+    </a>
+    <a href="./docs.html" class="sb-item" title="Docs">
+      <div class="sb-icon"><i data-lucide="book-open"></i></div>
+      <span class="sb-label">Docs</span>
+    </a>
+    <a href="./community.html" class="sb-item" title="Community">
+      <div class="sb-icon"><i data-lucide="users"></i></div>
+      <span class="sb-label">Community</span>
+    </a>
+    <a href="./blog.html" class="sb-item" title="Blog">
+      <div class="sb-icon"><i data-lucide="newspaper"></i></div>
+      <span class="sb-label">Blog</span>
+    </a>
+  </nav>
+
+  <!-- Secondary nav -->
+  <nav class="sb-nav sb-nav-bottom">
+    <a href="./pricing.html" class="sb-item" title="Pricing">
+      <div class="sb-icon"><i data-lucide="credit-card"></i></div>
+      <span class="sb-label">Pricing</span>
+    </a>
+    <a href="./support.html" class="sb-item" title="Support">
+      <div class="sb-icon"><i data-lucide="life-buoy"></i></div>
+      <span class="sb-label">Support</span>
+    </a>
+    <a href="./enterprise.html" class="sb-item" title="Enterprise">
+      <div class="sb-icon"><i data-lucide="building-2"></i></div>
+      <span class="sb-label">Business</span>
+    </a>
+  </nav>
+
+  <!-- Footer: GitHub · Theme · Login -->
+  <div class="sb-footer">
+    <a href="https://github.com/pitchshow/pitchshow" class="sb-icon-btn" target="_blank" title="GitHub">
+      <i data-lucide="github"></i>
+    </a>
+    <!-- Theme toggle: coming later when light mode is fully designed -->
+    <!-- sign-in button: visible after Cloud launch -->
+  </div>
+
+</aside>
+
+
+<!-- ══════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════ -->
+<main class="main" id="main">
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="grid-bg"></div>
+
+    <!-- Single-column content (kiro style) -->
+    <div class="hero-content">
+
+
+      <!-- Typewriter row: mascot + cursor -->
+      <div class="hero-type-row">
+        <!-- Peach mascot — exact v4 design from BRAND_GUIDELINES.md -->
+        <span class="hero-mascot" id="heroMascot">
+          <svg width="52" height="52" viewBox="0 0 48 48" fill="none">
+            <defs>
+              <radialGradient id="pg-hero" cx="20" cy="14" r="30" gradientUnits="userSpaceOnUse">
+                <stop offset="0%"   stop-color="#FFF9F4"/>
+                <stop offset="52%"  stop-color="#FFE8D8"/>
+                <stop offset="100%" stop-color="#FFD0BA"/>
+              </radialGradient>
+            </defs>
+            <!-- Body: warm cream gradient, organic peach shape -->
+            <path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z"
+                  fill="url(#pg-hero)"/>
+            <!-- Leaf: fixed position per brand guidelines -->
+            <ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#3d6428" transform="rotate(20 27.5 9.5)"/>
+            <path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#5a3818" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <!-- Blush: always present -->
+            <ellipse cx="10" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.15)"/>
+            <ellipse cx="38" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.15)"/>
+            <!-- Idle dot eyes · · -->
+            <circle cx="16" cy="27" r="2.2" fill="#1a0810"/>
+            <circle cx="32" cy="27" r="2.2" fill="#1a0810"/>
+          </svg>
+        </span>
+      </div>
+
+      <!-- H1: typewriter fills this in -->
+      <h1 class="hero-h1" id="heroH1" aria-label="Pitch an idea. Walk out with a show."></h1>
+
+      <!-- Rotating feature subline (typewriter cycle) -->
+      <p class="hero-subline" id="heroSubline"></p>
+
+      <!-- Sub-text (fades in after typing) -->
+      <p class="hero-body h-fade">
+        You had an idea. You typed it in.
+        10 minutes later: 12 slides, real citations, live animations,
+        a speaking script, and a URL you can share right now.
+        That's what a production company looks like.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-actions h-fade">
+        <a href="#try-now" class="btn-rainbow-hero">
+          Get started free
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://github.com/pitchshow/pitchshow" target="_blank" class="btn-pill-ghost">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.475 2 2 6.475 2 12a10 10 0 006.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.337 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 012.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0022 12c0-5.525-4.475-10-10-10z"/></svg>
+          Star us
+        </a>
+        <a href="#download" class="btn-pill-download">
+          Download
+          <i data-lucide="arrow-down" style="width:14px;height:14px"></i>
+        </a>
+      </div>
+
+      <!-- Pipeline: Pitch → … → Show → Reach -->
+      <div class="pipeline h-fade" id="pipeline">
+        <div class="pip" data-i="0">
+          <i data-lucide="lightbulb" style="width:13px;height:13px"></i>
+          <span>Pitch</span>
+        </div>
+        <i data-lucide="chevron-right" class="p-sep"></i>
+        <div class="pip" data-i="1">
+          <i data-lucide="search" style="width:13px;height:13px"></i>
+          <span>Research</span>
+        </div>
+        <i data-lucide="chevron-right" class="p-sep"></i>
+        <div class="pip" data-i="2">
+          <i data-lucide="git-branch" style="width:13px;height:13px"></i>
+          <span>Story</span>
+        </div>
+        <i data-lucide="chevron-right" class="p-sep"></i>
+        <div class="pip" data-i="3">
+          <i data-lucide="layers" style="width:13px;height:13px"></i>
+          <span>Build</span>
+        </div>
+        <i data-lucide="chevron-right" class="p-sep"></i>
+        <div class="pip" data-i="4">
+          <i data-lucide="mic" style="width:13px;height:13px"></i>
+          <span>Script</span>
+        </div>
+        <i data-lucide="chevron-right" class="p-sep"></i>
+        <div class="pip pip-show" data-i="5">
+          <i data-lucide="sparkles" style="width:13px;height:13px"></i>
+          <span>Show</span>
+        </div>
+        <i data-lucide="chevron-right" class="p-sep"></i>
+        <div class="pip pip-end" data-i="6">
+          <i data-lucide="send" style="width:13px;height:13px"></i>
+          <span>Reach</span>
+        </div>
+      </div>
+
+    </div><!-- /hero-content -->
+
+    <!-- Video placeholder — will be replaced with product demo video -->
+    <div class="hero-product h-fade" id="demo" style="padding:0 40px 60px">
+      <div class="video-placeholder">
+        <div class="vp-corners">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="vp-inner">
+          <div class="vp-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vp-label">Product demo — coming soon</div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Stats row below hero -->
+    <div class="hero-stats h-fade">
+      <div class="hs"><b>10 min</b><span>pitch to show</span></div>
+      <div class="hs-div"></div>
+      <div class="hs"><b>7×</b><span>export formats</span></div>
+      <div class="hs-div"></div>
+      <div class="hs"><b>100%</b><span>animation fidelity</span></div>
+      <div class="hs-div"></div>
+      <div class="hs"><b>0</b><span>lines of code</span></div>
+    </div>
+  </section>
+
+
+  <!-- ── PROVIDERS ── (covered by model ticker above) -->
+  <div class="providers" style="display:none">
+    <span class="prov-lbl">Works with your AI stack — API key or AWS Bedrock credentials</span>
+    <div class="prov-pills">
+      <span>AWS Bedrock</span><span>Claude</span><span>GPT-4o</span>
+      <span>DeepSeek</span><span>Gemini</span><span>Grok</span>
+      <span>Groq</span><span>OpenRouter</span>
+      <span class="prov-etc">+ any OpenAI-compatible endpoint</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       FEATURES (kiro left/right split)
+  ══════════════════════════════════ -->
+
+  <!-- ── M3 Dual-Column Features ── -->
+  <div id="features" style="background:var(--bg,#0e0e1e)">
+  <div class="feat-m3-wrap">
+    <!-- LEFT -->
+    <div class="feat-m3-left" id="featLeft">
+
+      <div class="feat-m3-section on" data-fi="0">
+        <div class="feat-m3-num">01 — Director Mode</div>
+        <div class="feat-m3-kicker"><i data-lucide="layout-list" style="width:12px;height:12px"></i> Director Mode</div>
+        <h2 class="feat-m3-h">You direct.<br>AI builds.</h2>
+        <p class="feat-m3-p">You type: <em>"10-minute pitch for our Series A, CFO audience, 8 slides."</em> Before a single slide is built, the entire narrative is laid out — hook, tension, data moment, CTA. You move beats around. AI builds your version exactly.</p>
+        <ul class="feat-m3-pts">
+          <li>Narrative arc with energy curve</li>
+          <li>Auto pacing check — hook, CTA, breather points</li>
+          <li>Drag to reorder beats before building</li>
+          <li>3-slide batches with live checkpoints</li>
+        </ul>
+      </div>
+
+      <div class="feat-m3-section" data-fi="1">
+        <div class="feat-m3-num">02 — Vibe Mode</div>
+        <div class="feat-m3-kicker"><i data-lucide="mouse-pointer-2" style="width:12px;height:12px"></i> Vibe Mode</div>
+        <h2 class="feat-m3-h">Click anything.<br>Change everything.</h2>
+        <p class="feat-m3-p">Click the chart. A pin appears. You type <em>"show as YoY decline, highlight Q3 drop in red."</em> Two seconds later, done. No code. No prompt gymnastics. Just: click the thing, say what you want, watch it happen.</p>
+        <ul class="feat-m3-pts">
+          <li>Click any text, chart, icon, or visual element</li>
+          <li>Natural language — describe the change, see it happen</li>
+          <li>Updates appear in under 2 seconds</li>
+          <li>Multi-select for batch edits across elements</li>
+        </ul>
+      </div>
+
+      <div class="feat-m3-section" data-fi="2">
+        <div class="feat-m3-num">03 — Deep Knowledge</div>
+        <div class="feat-m3-kicker"><i data-lucide="brain" style="width:12px;height:12px"></i> Deep Knowledge</div>
+        <h2 class="feat-m3-h">Know more<br>than you show.</h2>
+        <p class="feat-m3-p">Every slide has a research layer. One click: real citations. Another click: the 5 questions they're most likely to ask, with full written answers. You were prepared before you knew you needed to be.</p>
+        <ul class="feat-m3-pts">
+          <li>4–6 real web searches + citations per slide</li>
+          <li>5–8 predicted questions with written answers</li>
+          <li>150–180 word speaker script per slide</li>
+          <li>All visible in Presenter Mode on stage</li>
+        </ul>
+      </div>
+
+      <div class="feat-m3-section" data-fi="3">
+        <div class="feat-m3-num">04 — Web Hosting</div>
+        <div class="feat-m3-kicker"><i data-lucide="globe" style="width:12px;height:12px"></i> Your show has a URL</div>
+        <h2 class="feat-m3-h">"I sent a link,<br>not a file."</h2>
+        <p class="feat-m3-p">One click to publish. They open it on their phone during their commute — full animations, every transition, no software required. Before the meeting: pre-read. During: QR code in corner. After: the link in your follow-up <em>is</em> the presentation.</p>
+        <ul class="feat-m3-pts">
+          <li>Full animations on any device, no software required</li>
+          <li>Automatic multi-device adaptive layout</li>
+          <li>Public / Private / Password protected</li>
+          <li>Your portfolio at pitchshow.live/you</li>
+        </ul>
+      </div>
+
+      <div class="feat-m3-section" data-fi="4">
+        <div class="feat-m3-num">05 — Animated Export</div>
+        <div class="feat-m3-kicker"><i data-lucide="shield" style="width:12px;height:12px"></i> Animated Export</div>
+        <h2 class="feat-m3-h">"The PowerPoint<br>still moved."</h2>
+        <p class="feat-m3-p">Your client asked for a PPTX. You sent one. They opened it. The slides transitioned. The title flew in. The background pulsed. Every other tool exports flat images. You export the actual content — every element moves, every word is still editable.</p>
+        <ul class="feat-m3-pts">
+          <li>Slide transitions animate in PowerPoint</li>
+          <li>Every text element remains editable</li>
+          <li>Background loops as embedded video</li>
+          <li>Morph smooth transitions on every slide</li>
+        </ul>
+        <div class="feat-m3-moat"><i data-lucide="shield-check" style="width:12px;height:12px"></i> Structurally impossible for other tools to replicate</div>
+      </div>
+
+      <div class="feat-m3-section" data-fi="5">
+        <div class="feat-m3-num">06 — Universal Import</div>
+        <div class="feat-m3-kicker"><i data-lucide="clock-4" style="width:12px;height:12px"></i> Universal Import</div>
+        <h2 class="feat-m3-h">Your 2021 deck.<br>2026 energy.</h2>
+        <p class="feat-m3-p">Open your old PowerPoint — clip art, Arial font, zero animations. Drop it into PitchShow. AI reads every slide, understands what each one is trying to say, and rebuilds it fully animated. Same content. Completely reimagined.</p>
+        <ul class="feat-m3-pts">
+          <li>Any PPTX — any era, any quality, any template</li>
+          <li>AI understands slide roles: hook, data, insight, CTA</li>
+          <li>Brand colors extracted and applied to new theme</li>
+          <li>Static charts become animated</li>
+        </ul>
+      </div>
+
+    </div><!-- /feat-m3-left -->
+
+    <!-- RIGHT: sticky panels -->
+    <div class="feat-m3-right">
+      <div class="feat-m3-panels" id="featPanels">
+
+        <!-- 0: Director Mode -->
+        <div class="feat-m3-panel on" data-fi="0">
+          <div class="fmp-video-wrap">
+            <video src="" muted loop playsinline></video>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g0' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230a0818'/%3E%3Cstop offset='0.5' stop-color='%2314103a'/%3E%3Cstop offset='1' stop-color='%23080612'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g0)'/%3E%3Crect x='60' y='60' width='680' height='36' rx='6' fill='%23ffffff08'/%3E%3Crect x='72' y='72' width='120' height='12' rx='3' fill='%23a78bfa60'/%3E%3Crect x='210' y='72' width='80' height='12' rx='3' fill='%23ffffff20'/%3E%3Crect x='308' y='72' width='80' height='12' rx='3' fill='%23ffffff20'/%3E%3Crect x='406' y='72' width='80' height='12' rx='3' fill='%23ffffff20'/%3E%3Crect x='60' y='120' width='340' height='200' rx='12' fill='%23ffffff06' stroke='%23a78bfa30' stroke-width='1'/%3E%3Crect x='80' y='140' width='60' height='8' rx='3' fill='%23a78bfa80'/%3E%3Crect x='80' y='160' width='280' height='20' rx='4' fill='%23ffffff90'/%3E%3Crect x='80' y='190' width='220' height='12' rx='3' fill='%23ffffff40'/%3E%3Crect x='80' y='210' width='180' height='12' rx='3' fill='%23ffffff30'/%3E%3Crect x='80' y='240' width='290' height='8' rx='3' fill='%23a78bfa40'/%3E%3Crect x='80' y='256' width='260' height='8' rx='3' fill='%23a78bfa30'/%3E%3Crect x='80' y='272' width='240' height='8' rx='3' fill='%23a78bfa25'/%3E%3Crect x='80' y='288' width='200' height='8' rx='3' fill='%23a78bfa20'/%3E%3Crect x='420' y='120' width='320' height='200' rx='12' fill='%23ffffff06' stroke='%23ffffff10' stroke-width='1'/%3E%3Crect x='440' y='145' width='80' height='6' rx='3' fill='%23a78bfa60'/%3E%3Crect x='440' y='162' width='140' height='16' rx='3' fill='%23ffffff80'/%3E%3Crect x='440' y='188' width='280' height='7' rx='3' fill='%23ffffff25'/%3E%3Crect x='440' y='203' width='240' height='7' rx='3' fill='%23ffffff20'/%3E%3Crect x='440' y='218' width='260' height='7' rx='3' fill='%23ffffff18'/%3E%3Crect x='440' y='240' width='60' height='22' rx='4' fill='%23a78bfa25' stroke='%23a78bfa50' stroke-width='1'/%3E%3Crect x='510' y='240' width='60' height='22' rx='4' fill='%23a78bfa25' stroke='%23a78bfa50' stroke-width='1'/%3E%3Crect x='580' y='240' width='60' height='22' rx='4' fill='%23a78bfa25' stroke='%23a78bfa50' stroke-width='1'/%3E%3Crect x='60' y='345' width='680' height='90' rx='12' fill='%23ffffff05' stroke='%23ffffff08' stroke-width='1'/%3E%3Crect x='80' y='362' width='40' height='8' rx='3' fill='%23ffffff30'/%3E%3Crect x='80' y='378' width='620' height='6' rx='3' fill='%23a78bfa30'/%3E%3Crect x='80' y='392' width='550' height='6' rx='3' fill='%23a78bfa25'/%3E%3Crect x='80' y='406' width='580' height='6' rx='3' fill='%23a78bfa20'/%3E%3Crect x='60' y='460' width='680' height='1' fill='%23ffffff10'/%3E%3Crect x='60' y='480' width='140' height='10' rx='5' fill='%23a78bfa40'/%3E%3Crect x='60' y='500' width='680' height='7' rx='3' fill='%23ffffff12'/%3E%3Crect x='60' y='515' width='580' height='7' rx='3' fill='%23ffffff10'/%3E%3Crect x='60' y='530' width='620' height='7' rx='3' fill='%23ffffff0e'/%3E%3Ctext x='400' y='564' font-family='system-ui,sans-serif' font-size='11' fill='%23a78bfa60' text-anchor='middle'%3EDirector Mode — Narrative Arc%3C/text%3E%3C/svg%3E" alt="Director Mode" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+            <div class="fmp-ph" style="background:transparent">
+              <div class="fmp-note" style="position:absolute;bottom:14px;left:14px;right:14px"><span class="fmp-nd" style="background:#a78bfa"></span>Building narrative arc — hook, tension, data, CTA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1: Vibe Mode -->
+        <div class="feat-m3-panel" data-fi="1">
+          <div class="fmp-video-wrap">
+            <video src="" muted loop playsinline></video>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230a1208'/%3E%3Cstop offset='0.5' stop-color='%23162014'/%3E%3Cstop offset='1' stop-color='%23080e08'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g1)'/%3E%3Crect x='60' y='60' width='680' height='380' rx='16' fill='%230e1a0c' stroke='%234ade8025' stroke-width='1'/%3E%3Crect x='80' y='85' width='60' height='8' rx='3' fill='%234ade8080'/%3E%3Crect x='80' y='103' width='220' height='22' rx='4' fill='%23ffffff90'/%3E%3Crect x='80' y='140' width='580' height='120' rx='10' fill='%23ffffff08'/%3E%3Crect x='100' y='160' width='180' height='14' rx='3' fill='%23ffffff50'/%3E%3Crect x='100' y='183' width='540' height='8' rx='3' fill='%23ffffff25'/%3E%3Crect x='100' y='198' width='480' height='8' rx='3' fill='%23ffffff20'/%3E%3Crect x='100' y='213' width='520' height='8' rx='3' fill='%23ffffff1a'/%3E%3Ccircle cx='340' cy='180' r='16' fill='%234ade8040' stroke='%234ade80' stroke-width='1.5'/%3E%3Ccircle cx='340' cy='180' r='4' fill='%234ade80'/%3E%3Crect x='360' y='170' width='130' height='26' rx='6' fill='%230a1208' stroke='%234ade8060' stroke-width='1'/%3E%3Crect x='370' y='177' width='110' height='7' rx='3' fill='%234ade8070'/%3E%3Crect x='370' y='188' width='80' height='5' rx='2' fill='%234ade8040'/%3E%3Crect x='80' y='280' width='580' height='130' rx='10' fill='%23ffffff06'/%3E%3Crect x='100' y='300' width='50' height='6' rx='3' fill='%234ade8060'/%3E%3Crect x='100' y='315' width='30' height='70' rx='3' fill='%234ade8050'/%3E%3Crect x='140' y='330' width='30' height='55' rx='3' fill='%234ade8050'/%3E%3Crect x='180' y='320' width='30' height='65' rx='3' fill='%234ade8050'/%3E%3Crect x='220' y='310' width='30' height='75' rx='3' fill='%234ade8050'/%3E%3Crect x='260' y='340' width='30' height='45' rx='3' fill='%23ef444450'/%3E%3Crect x='300' y='325' width='30' height='60' rx='3' fill='%234ade8050'/%3E%3Crect x='340' y='305' width='30' height='80' rx='3' fill='%234ade8050'/%3E%3Crect x='60' y='460' width='680' height='1' fill='%234ade8015'/%3E%3Crect x='60' y='480' width='200' height='8' rx='4' fill='%234ade8030'/%3E%3Crect x='60' y='498' width='680' height='6' rx='3' fill='%23ffffff10'/%3E%3Crect x='60' y='512' width='520' height='6' rx='3' fill='%23ffffff0d'/%3E%3Ctext x='400' y='546' font-family='system-ui,sans-serif' font-size='11' fill='%234ade8060' text-anchor='middle'%3EVibe Mode — Click any element to edit%3C/text%3E%3C/svg%3E" alt="Vibe Mode" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+            <div class="fmp-ph" style="background:transparent">
+              <div class="fmp-note" style="position:absolute;bottom:14px;left:14px;right:14px"><span class="fmp-nd" style="background:#4ade80"></span>Revenue chart updated in 1.8s</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2: Deep Knowledge -->
+        <div class="feat-m3-panel" data-fi="2">
+          <div class="fmp-video-wrap">
+            <video src="" muted loop playsinline></video>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23180808'/%3E%3Cstop offset='0.5' stop-color='%23281010'/%3E%3Cstop offset='1' stop-color='%23100806'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g2)'/%3E%3Crect x='60' y='60' width='450' height='380' rx='14' fill='%231a0a0a' stroke='%23f8717125' stroke-width='1'/%3E%3Crect x='80' y='84' width='70' height='7' rx='3' fill='%23f8717170'/%3E%3Crect x='80' y='101' width='240' height='24' rx='4' fill='%23ffffff85'/%3E%3Crect x='80' y='140' width='410' height='8' rx='3' fill='%23ffffff30'/%3E%3Crect x='80' y='156' width='380' height='8' rx='3' fill='%23ffffff28'/%3E%3Crect x='80' y='172' width='400' height='8' rx='3' fill='%23ffffff22'/%3E%3Crect x='80' y='204' width='410' height='1' fill='%23f8717120'/%3E%3Crect x='80' y='218' width='50' height='7' rx='3' fill='%23f8717160'/%3E%3Crect x='80' y='234' width='390' height='6' rx='3' fill='%23f8717130'/%3E%3Crect x='80' y='248' width='360' height='6' rx='3' fill='%23f8717125'/%3E%3Crect x='80' y='262' width='380' height='6' rx='3' fill='%23f8717120'/%3E%3Crect x='80' y='290' width='410' height='1' fill='%23f8717118'/%3E%3Crect x='80' y='305' width='50' height='7' rx='3' fill='%23f8717155'/%3E%3Crect x='80' y='321' width='350' height='6' rx='3' fill='%23f8717128'/%3E%3Crect x='80' y='335' width='370' height='6' rx='3' fill='%23f8717122'/%3E%3Crect x='80' y='370' width='80' height='24' rx='6' fill='%23f8717125' stroke='%23f8717160' stroke-width='1'/%3E%3Crect x='172' y='370' width='80' height='24' rx='6' fill='%23ffffff08' stroke='%23ffffff20' stroke-width='1'/%3E%3Crect x='530' y='60' width='210' height='380' rx='14' fill='%231a0a0a' stroke='%23ffffff10' stroke-width='1'/%3E%3Crect x='548' y='80' width='60' height='6' rx='3' fill='%23f8717150'/%3E%3Crect x='548' y='98' width='174' height='8' rx='3' fill='%23ffffff60'/%3E%3Crect x='548' y='120' width='174' height='1' fill='%23ffffff10'/%3E%3Crect x='548' y='133' width='60' height='5' rx='2' fill='%23f8717140'/%3E%3Crect x='548' y='145' width='174' height='5' rx='2' fill='%23ffffff20'/%3E%3Crect x='548' y='157' width='150' height='5' rx='2' fill='%23ffffff18'/%3E%3Crect x='548' y='169' width='165' height='5' rx='2' fill='%23ffffff15'/%3E%3Crect x='548' y='190' width='174' height='1' fill='%23ffffff10'/%3E%3Crect x='548' y='203' width='60' height='5' rx='2' fill='%23f8717140'/%3E%3Crect x='548' y='215' width='160' height='5' rx='2' fill='%23ffffff20'/%3E%3Crect x='548' y='227' width='174' height='5' rx='2' fill='%23ffffff18'/%3E%3Crect x='548' y='239' width='130' height='5' rx='2' fill='%23ffffff15'/%3E%3Crect x='548' y='260' width='174' height='1' fill='%23ffffff10'/%3E%3Crect x='548' y='273' width='60' height='5' rx='2' fill='%23f8717140'/%3E%3Crect x='548' y='285' width='170' height='5' rx='2' fill='%23ffffff20'/%3E%3Crect x='548' y='297' width='155' height='5' rx='2' fill='%23ffffff18'/%3E%3Ctext x='400' y='480' font-family='system-ui,sans-serif' font-size='11' fill='%23f8717160' text-anchor='middle'%3EDeep Knowledge — Citations %26 Q%26A Prep%3C/text%3E%3C/svg%3E" alt="Deep Knowledge" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+            <div class="fmp-ph" style="background:transparent">
+              <div class="fmp-note" style="position:absolute;bottom:14px;left:14px;right:14px"><span class="fmp-nd" style="background:#f87171"></span>McKinsey 2025 · n=1,491 · 4 sources cited</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3: Web Hosting -->
+        <div class="feat-m3-panel" data-fi="3">
+          <div class="fmp-video-wrap">
+            <video src="" muted loop playsinline></video>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23060c18'/%3E%3Cstop offset='0.5' stop-color='%230c1828'/%3E%3Cstop offset='1' stop-color='%23060a14'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g3)'/%3E%3Crect x='100' y='40' width='600' height='32' rx='8' fill='%23ffffff08' stroke='%2338bdf820' stroke-width='1'/%3E%3Ccircle cx='122' cy='56' r='6' fill='%2338bdf840'/%3E%3Crect x='140' y='50' width='200' height='12' rx='4' fill='%2338bdf830'/%3E%3Crect x='620' y='50' width='60' height='12' rx='4' fill='%2338bdf825'/%3E%3Crect x='60' y='100' width='680' height='380' rx='16' fill='%230a1520' stroke='%2338bdf818' stroke-width='1'/%3E%3Crect x='80' y='124' width='80' height='7' rx='3' fill='%2338bdf870'/%3E%3Crect x='80' y='142' width='300' height='26' rx='5' fill='%23ffffff88'/%3E%3Crect x='80' y='184' width='640' height='180' rx='12' fill='%230d1e2e'/%3E%3Crect x='80' y='184' width='640' height='180' rx='12' fill='none' stroke='%2338bdf820' stroke-width='1'/%3E%3Crect x='100' y='205' width='80' height='8' rx='3' fill='%2338bdf860'/%3E%3Crect x='100' y='223' width='240' height='18' rx='3' fill='%23ffffff70'/%3E%3Crect x='100' y='252' width='580' height='7' rx='3' fill='%23ffffff20'/%3E%3Crect x='100' y='267' width='520' height='7' rx='3' fill='%23ffffff18'/%3E%3Crect x='100' y='282' width='560' height='7' rx='3' fill='%23ffffff15'/%3E%3Crect x='100' y='310' width='80' height='26' rx='6' fill='%2338bdf825' stroke='%2338bdf860' stroke-width='1'/%3E%3Crect x='192' y='310' width='80' height='26' rx='6' fill='%23ffffff08' stroke='%23ffffff20' stroke-width='1'/%3E%3Crect x='80' y='384' width='640' height='1' fill='%2338bdf815'/%3E%3Crect x='80' y='400' width='100' height='7' rx='3' fill='%2338bdf840'/%3E%3Crect x='80' y='416' width='640' height='6' rx='3' fill='%23ffffff10'/%3E%3Crect x='80' y='430' width='580' height='6' rx='3' fill='%23ffffff0d'/%3E%3Ctext x='400' y='526' font-family='system-ui,sans-serif' font-size='11' fill='%2338bdf860' text-anchor='middle'%3EWeb Hosting — Live animated URL%3C/text%3E%3C/svg%3E" alt="Web Hosting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+            <div class="fmp-ph" style="background:transparent">
+              <div class="fmp-note" style="position:absolute;bottom:14px;left:14px;right:14px"><span class="fmp-nd" style="background:#38bdf8"></span>pitchshow.live/you · Published · All devices</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4: Animated Export -->
+        <div class="feat-m3-panel" data-fi="4">
+          <div class="fmp-video-wrap">
+            <video src="" muted loop playsinline></video>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23120a06'/%3E%3Cstop offset='0.5' stop-color='%23201408'/%3E%3Cstop offset='1' stop-color='%230c0806'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g4)'/%3E%3Crect x='60' y='60' width='680' height='380' rx='16' fill='%231a0e08' stroke='%23fb923c20' stroke-width='1'/%3E%3Crect x='60' y='60' width='680' height='36' rx='16' fill='%23251508'/%3E%3Ccircle cx='88' cy='78' r='6' fill='%23ff5f5760'/%3E%3Ccircle cx='108' cy='78' r='6' fill='%23febc2e60'/%3E%3Ccircle cx='128' cy='78' r='6' fill='%2328c84060'/%3E%3Crect x='200' y='70' width='300' height='16' rx='5' fill='%23ffffff10'/%3E%3Crect x='510' y='70' width='80' height='16' rx='5' fill='%23fb923c20'/%3E%3Crect x='80' y='120' width='280' height='200' rx='10' fill='%23201408'/%3E%3Crect x='100' y='145' width='60' height='7' rx='3' fill='%23fb923c70'/%3E%3Crect x='100' y='164' width='220' height='18' rx='3' fill='%23ffffff80'/%3E%3Crect x='100' y='194' width='240' height='7' rx='3' fill='%23ffffff25'/%3E%3Crect x='100' y='209' width='210' height='7' rx='3' fill='%23ffffff20'/%3E%3Crect x='100' y='238' width='40' height='50' rx='4' fill='%23fb923c50'/%3E%3Crect x='150' y='253' width='40' height='35' rx='4' fill='%23fb923c50'/%3E%3Crect x='200' y='243' width='40' height='45' rx='4' fill='%23fb923c50'/%3E%3Crect x='250' y='228' width='40' height='60' rx='4' fill='%23fb923c50'/%3E%3Crect x='300' y='248' width='40' height='40' rx='4' fill='%23fb923c50'/%3E%3Crect x='380' y='120' width='340' height='200' rx='10' fill='%23201408' stroke='%23fb923c15' stroke-width='1'/%3E%3Crect x='400' y='145' width='60' height='6' rx='3' fill='%23fb923c60'/%3E%3Crect x='400' y='162' width='180' height='14' rx='3' fill='%23ffffff70'/%3E%3Crect x='400' y='188' width='300' height='5' rx='2' fill='%23ffffff22'/%3E%3Crect x='400' y='200' width='280' height='5' rx='2' fill='%23ffffff1c'/%3E%3Crect x='400' y='212' width='295' height='5' rx='2' fill='%23ffffff18'/%3E%3Crect x='400' y='240' width='70' height='22' rx='5' fill='%23fb923c22' stroke='%23fb923c55' stroke-width='1'/%3E%3Crect x='480' y='240' width='70' height='22' rx='5' fill='%23ffffff08' stroke='%23ffffff18' stroke-width='1'/%3E%3Crect x='560' y='240' width='70' height='22' rx='5' fill='%23ffffff08' stroke='%23ffffff18' stroke-width='1'/%3E%3Crect x='80' y='345' width='640' height='1' fill='%23fb923c15'/%3E%3Crect x='80' y='362' width='100' height='7' rx='3' fill='%23fb923c40'/%3E%3Crect x='80' y='380' width='640' height='6' rx='3' fill='%23ffffff10'/%3E%3Crect x='80' y='394' width='560' height='6' rx='3' fill='%23ffffff0d'/%3E%3Ctext x='400' y='490' font-family='system-ui,sans-serif' font-size='11' fill='%23fb923c60' text-anchor='middle'%3EAnimated Export — PPTX with Morph · Text editable%3C/text%3E%3C/svg%3E" alt="Animated Export" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+            <div class="fmp-ph" style="background:transparent">
+              <div class="fmp-note" style="position:absolute;bottom:14px;left:14px;right:14px"><span class="fmp-nd" style="background:#fb923c"></span>Morph transitions · Editable text · Embedded video</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5: Universal Import -->
+        <div class="feat-m3-panel" data-fi="5">
+          <div class="fmp-video-wrap">
+            <video src="" muted loop playsinline></video>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g5' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230e0620'/%3E%3Cstop offset='0.5' stop-color='%231c1038'/%3E%3Cstop offset='1' stop-color='%230a0618'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g5)'/%3E%3Crect x='60' y='80' width='300' height='340' rx='14' fill='%23150a28' stroke='%23c084fc20' stroke-width='1'/%3E%3Crect x='80' y='104' width='50' height='6' rx='3' fill='%23c084fc50'/%3E%3Crect x='80' y='122' width='180' height='16' rx='3' fill='%23ffffff50'/%3E%3Crect x='80' y='152' width='260' height='100' rx='8' fill='%23201040'/%3E%3Crect x='100' y='170' width='80' height='8' rx='3' fill='%23ffffff30'/%3E%3Crect x='100' y='186' width='220' height='6' rx='3' fill='%23ffffff20'/%3E%3Crect x='100' y='199' width='200' height='6' rx='3' fill='%23ffffff18'/%3E%3Crect x='100' y='212' width='210' height='6' rx='3' fill='%23ffffff15'/%3E%3Crect x='80' y='270' width='120' height='8' rx='3' fill='%23c084fc30'/%3E%3Crect x='80' y='286' width='260' height='6' rx='3' fill='%23ffffff15'/%3E%3Crect x='80' y='299' width='240' height='6' rx='3' fill='%23ffffff12'/%3E%3Crect x='80' y='340' width='60' height='22' rx='5' fill='%23c084fc20' stroke='%23c084fc40' stroke-width='1'/%3E%3Crect x='152' y='340' width='60' height='22' rx='5' fill='%23ffffff08' stroke='%23ffffff18' stroke-width='1'/%3E%3Crect x='400' y='80' width='340' height='340' rx='14' fill='%231a0e30' stroke='%23c084fc35' stroke-width='1.5'/%3E%3Crect x='418' y='104' width='50' height='6' rx='3' fill='%23c084fc70'/%3E%3Crect x='418' y='122' width='200' height='20' rx='4' fill='%23ffffff80'/%3E%3Crect x='418' y='158' width='300' height='130' rx='10' fill='%23200e3a'/%3E%3Crect x='438' y='178' width='90' height='9' rx='3' fill='%23c084fc60'/%3E%3Crect x='438' y='198' width='260' height='7' rx='3' fill='%23ffffff28'/%3E%3Crect x='438' y='213' width='240' height='7' rx='3' fill='%23ffffff22'/%3E%3Crect x='438' y='228' width='250' height='7' rx='3' fill='%23ffffff1e'/%3E%3Crect x='438' y='250' width='50' height='22' rx='4' fill='%23c084fc25' stroke='%23c084fc60' stroke-width='1'/%3E%3Crect x='500' y='250' width='50' height='22' rx='4' fill='%23c084fc20' stroke='%23c084fc40' stroke-width='1'/%3E%3Crect x='562' y='250' width='50' height='22' rx='4' fill='%23c084fc18' stroke='%23c084fc30' stroke-width='1'/%3E%3Crect x='418' y='308' width='120' height='8' rx='3' fill='%23c084fc40'/%3E%3Crect x='418' y='324' width='300' height='6' rx='3' fill='%23ffffff18'/%3E%3Crect x='418' y='337' width='280' height='6' rx='3' fill='%23ffffff15'/%3E%3Crect x='418' y='368' width='80' height='26' rx='7' fill='%23c084fc25' stroke='%23c084fc55' stroke-width='1'/%3E%3Crect x='356' y='180' width='40' height='160' rx='4' fill='%230e0620'/%3E%3Ctext x='376' y='266' font-family='system-ui,sans-serif' font-size='9' fill='%23c084fc60' text-anchor='middle' transform='rotate(-90 376 266)'%3E2021 → 2026%3C/text%3E%3Ctext x='400' y='470' font-family='system-ui,sans-serif' font-size='11' fill='%23c084fc60' text-anchor='middle'%3EUniversal Import — Old PPTX rebuilt animated%3C/text%3E%3C/svg%3E" alt="Universal Import" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+            <div class="fmp-ph" style="background:transparent">
+              <div class="fmp-note" style="position:absolute;bottom:14px;left:14px;right:14px"><span class="fmp-nd" style="background:#c084fc"></span>Brand extracted · Rebuilt in 9 min</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /feat-m3-panels -->
+    </div><!-- /feat-m3-right -->
+  </div><!-- /feat-m3-wrap -->
+  </div><!-- /#features wrapper -->
+
+  <!-- placeholder section tags removed; M3 div above replaces them -->
+  <section class="feat-section" id="features-legacy" style="display:none">
+    <div class="feat-row" style="display:none">
+      <div class="feat-text">
+        <div class="kicker">Director Mode</div>
+        <h2>You direct.<br/>AI builds.</h2>
+        <p>You type: <em>"10-minute pitch for our Series A, CFO audience, 8 slides."</em> Before a single slide is built, the entire narrative is laid out in front of you — the hook, the tension, the data moment, the CTA where it should land. You move beats around. You cut the weak ones. AI builds your version exactly.</p>
+        <p>Not what it thinks you mean. What you actually designed.</p>
+        <ul class="feat-pts">
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Narrative arc visualization with energy curve</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Auto pacing check — hook, CTA, breather points</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Drag to reorder beats before building starts</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>3-slide batches with live checkpoints</li>
+        </ul>
+      </div>
+      <div class="feat-media">
+        <div class="video-placeholder">
+          <div class="vp-inner">
+            <div class="vp-icon">
+              <i data-lucide="play-circle" style="width:32px;height:32px"></i>
+            </div>
+            <div class="vp-title">Director Mode Demo</div>
+            <div class="vp-desc">Seed an idea → see the narrative arc → reshape it → AI builds your version</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F2: Vibe Mode (flipped) -->
+  <section class="feat-section feat-alt" style="display:none">
+    <div class="feat-row feat-flip">
+      <div class="feat-text">
+        <div class="kicker">
+          <i data-lucide="mouse-pointer-2" style="width:12px;height:12px"></i>
+          Vibe Mode
+        </div>
+        <h2>Click anything.<br/>Change everything.</h2>
+        <p>The deck is done. Then the CFO asks you to change the revenue chart. In the old world: download, open the file, find the data source, 30 minutes, meeting in 10. In this world: you click the chart. A pin appears. You type <em>"show as YoY decline, highlight Q3 drop in red."</em> Two seconds later, done.</p>
+        <p>No code. No describing coordinates. No prompt gymnastics. Just: click the thing, say what you want, watch it happen.</p>
+        <ul class="feat-pts">
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Click any text, chart, icon, or visual element</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Natural language — describe the change, see it happen</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Updates appear in under 2 seconds</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Multi-select for batch edits across elements</li>
+        </ul>
+      </div>
+      <div class="feat-media">
+        <div class="video-placeholder">
+          <div class="vp-inner">
+            <div class="vp-icon">
+              <i data-lucide="play-circle" style="width:32px;height:32px"></i>
+            </div>
+            <div class="vp-title">Vibe Mode Demo</div>
+            <div class="vp-desc">Click the bar chart → pin appears → type the change → watch it update</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F3: Deep Knowledge -->
+  <section class="feat-section" style="display:none">
+    <div class="feat-row">
+      <div class="feat-text">
+        <div class="kicker">
+          <i data-lucide="brain" style="width:12px;height:12px"></i>
+          Deep Knowledge
+        </div>
+        <h2>Know more<br/>than you show.</h2>
+        <p>Halfway through your investor deck, someone asks: <em>"Where does that 88% figure come from?"</em> In the old world, you say <em>"I'll follow up on that."</em> In this world, you open the panel. McKinsey Global Survey 2025, n=1,491 enterprises, published February — the citation was already there before you stepped on stage.</p>
+        <p>Every slide has a research layer. One click: real citations. Another click: the 5 questions they're most likely to ask, with full written answers. You were prepared before you knew you needed to be.</p>
+        <ul class="feat-pts">
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Deep Research — 4–6 web searches, real citations per slide</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Q&A Prep — 5–8 predicted questions with written answers</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Speaker script — 150–180 word script per slide</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>All visible in Presenter Mode on stage</li>
+        </ul>
+      </div>
+      <div class="feat-media">
+        <div class="video-placeholder">
+          <div class="vp-inner">
+            <div class="vp-icon">
+              <i data-lucide="play-circle" style="width:32px;height:32px"></i>
+            </div>
+            <div class="vp-title">Deep Knowledge Demo</div>
+            <div class="vp-desc">Presenter Mode — script, citations, Q&A predictions visible on stage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F4: Web Hosting (flipped) -->
+  <section class="feat-section feat-alt" style="display:none">
+    <div class="feat-row feat-flip">
+      <div class="feat-text">
+        <div class="kicker">
+          <i data-lucide="globe" style="width:12px;height:12px"></i>
+          Your show has a URL
+        </div>
+        <h2>"I sent a link,<br/>not a file."</h2>
+        <p>It's 11pm. The deck is done. In the old world: attach the file, cross your fingers it renders, wait. In this world: one click to publish. You send a link. They open it on their phone during their commute — full animations, every transition, no software required. By morning, three people have already seen it.</p>
+        <p>Before the meeting: share as a pre-read. During: QR code in the corner — the audience follows on their phones. After: the link in your follow-up <em>is</em> the presentation.</p>
+        <ul class="feat-pts">
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Full animations on any device — no software required</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Automatic multi-device adaptive layout</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Public / Private / Password protected</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Your portfolio at pitchshow.live/you</li>
+        </ul>
+      </div>
+      <div class="feat-media">
+        <div class="video-placeholder">
+          <div class="vp-inner">
+            <div class="vp-icon">
+              <i data-lucide="play-circle" style="width:32px;height:32px"></i>
+            </div>
+            <div class="vp-title">Web Hosting Demo</div>
+            <div class="vp-desc">One click → permanent URL → full animations on phone, tablet, desktop</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F5: Animated Export -->
+  <section class="feat-section" style="display:none">
+    <div class="feat-row">
+      <div class="feat-text">
+        <div class="kicker">
+          <i data-lucide="shield" style="width:12px;height:12px"></i>
+          Animated Export
+        </div>
+        <h2>"The PowerPoint<br/>still moved."</h2>
+        <p>Your client asked for a PPTX. So you sent one. They opened it in PowerPoint. The slides transitioned smoothly. The title flew in. The background pulsed. They were confused — that had never happened before.</p>
+        <p>Every other tool exports flat images dressed up as slides. You can't animate an image. We export the actual content — so every element moves the way it was designed to, and every word of text is still editable in PowerPoint.</p>
+        <ul class="feat-pts">
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Slide transitions animate in PowerPoint</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Every text element remains editable</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Background loops as embedded video</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Morph smooth transitions on every slide</li>
+        </ul>
+        <div class="feat-moat">
+          <i data-lucide="shield-check" style="width:12px;height:12px"></i>
+          Structurally impossible for other tools to replicate
+        </div>
+      </div>
+      <div class="feat-media">
+        <div class="video-placeholder">
+          <div class="vp-inner">
+            <div class="vp-icon">
+              <i data-lucide="play-circle" style="width:32px;height:32px"></i>
+            </div>
+            <div class="vp-title">Animated Export Demo</div>
+            <div class="vp-desc">Export → open in PowerPoint → transitions animate, text editable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- F6: Time Travel — the missing viral story (flipped) -->
+  <section class="feat-section feat-alt" style="display:none">
+    <div class="feat-row feat-flip">
+      <div class="feat-text">
+        <div class="kicker">
+          <i data-lucide="clock-4" style="width:12px;height:12px"></i>
+          Universal Import
+        </div>
+        <h2>Your 2021 deck.<br/>2026 energy.</h2>
+        <p>Open your old PowerPoint — the one with clip art, Arial font, and zero animations. Drop it into PitchShow. AI reads every slide, understands what each one is trying to say, and rebuilds it as a fully animated presentation.</p>
+        <p>Same content. Completely reimagined. In under 10 minutes, your old work becomes something you're proud to send again.</p>
+        <ul class="feat-pts">
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Any PPTX — any era, any quality, any template</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>AI understands slide roles: hook, data, insight, CTA</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Brand colors extracted and applied to new theme</li>
+          <li><i data-lucide="check" style="width:13px;height:13px"></i>Static charts become animated. Clip art becomes dynamic.</li>
+        </ul>
+      </div>
+      <div class="feat-media">
+        <div class="video-placeholder">
+          <div class="vp-inner">
+            <div class="vp-icon">
+              <i data-lucide="play-circle" style="width:32px;height:32px"></i>
+            </div>
+            <div class="vp-title">Time Travel Demo</div>
+            <div class="vp-desc">Drop a 2021 PPTX → watch it transform into animated React → before/after comparison</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why PitchShow bento ── -->
+  <section class="why-section">
+    <div class="fg-wrap why-header">
+      <div class="why-eyebrow">Why PitchShow</div>
+      <h2 class="why-h2">Your models. Your data.<br>Your show.</h2>
+      <p class="why-sub">Built for people who care about the quality of the output, not just the speed of the shortcut.</p>
+    </div>
+    <div class="fg-wrap why-grid" style="display:none">
+
+      <!-- Bento card 1: Vibe Mode (tall, spans 2 rows) -->
+      <div class="why-card why-card-tall">
+        <div class="why-vp">
+          <div class="wyp-ck">Hook</div>
+          <div class="wyp-ti">The $48B slide market<br>is broken. We fixed it.</div>
+          <div class="wyp-brs">
+            <div class="wyp-br"></div><div class="wyp-br"></div>
+            <div class="wyp-br" style="opacity:.4"></div><div class="wyp-br"></div>
+          </div>
+          <div class="wyp-ann"><span class="wyp-dot"></span>Make this chart animated and add market data</div>
+        </div>
+        <div class="why-chip">Vibe Mode</div>
+        <div class="why-h">Point. Click. Fix.</div>
+        <div class="why-p">Click any element on any slide and tell the AI exactly what to change. It does it — without touching anything else.</div>
+      </div>
+
+      <!-- Bento card 2: Models (top right) -->
+      <div class="why-card">
+        <div class="why-model-row">
+          <span class="why-mc">Claude</span>
+          <span class="why-mc">GPT-4o</span>
+          <span class="why-mc">Gemini</span>
+          <span class="why-mc">DeepSeek</span>
+          <span class="why-mc">Groq</span>
+        </div>
+        <div class="why-chip">Any Model</div>
+        <div class="why-h">No lock-in. Ever.</div>
+        <div class="why-p">Bring your own API key. Switch providers any time. Pay nothing extra.</div>
+      </div>
+
+      <!-- Bento card 3: Share (bottom right) -->
+      <div class="why-card">
+        <div class="why-share-row">
+          <span class="why-sp">Live URL</span>
+          <span class="why-sp">PPTX</span>
+          <span class="why-sp">PDF</span>
+        </div>
+        <div class="why-chip">Made to Share</div>
+        <div class="why-h">Walk in with anything.</div>
+        <div class="why-p">Animated URL, PPTX with Morph, clean PDF — generated at once when you finish.</div>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="help-circle" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>Q&A Prep</h3>
+        <p>One click before your presentation: AI predicts the 5–8 questions they're most likely to ask, with full written answers. When the hard question comes from the third row, your answer is already on screen.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="file-text" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>Audience Brief</h3>
+        <p>After your talk, one click generates a follow-up document: key points, data sources, action items, and extended reading. The link you send after the meeting, automatically written.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="palette" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>Brand Kit Import</h3>
+        <p>Upload your existing PPTX or brand file. PitchShow extracts your colors, fonts, and logo. Every deck you create from then on follows your brand — automatically.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="bar-chart-2" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>Narrative Arc Check</h3>
+        <p>See your story's energy curve before building. Hook too weak? CTA buried on slide 9? No breather after the data section? The pacing diagnostic catches it before your audience does.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="video" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>Video Call Mode</h3>
+        <p>Present directly in Zoom, Teams, or Meet without sharing your whole screen. A 1280×720 window titled "PitchShow Slides" appears in your window picker. You keep your speaker notes and controls.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="layers" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>9 Visual Styles</h3>
+        <p>From tech sci-fi to warm personal, business corporate to minimal pure. One click changes the entire visual identity of a deck. Brand kit import applies your identity to any style.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="code-2" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>MCP Integration</h3>
+        <p>Call <code>pitchshow_generate_deck</code> from Claude Code, Cursor, or Gemini CLI. A complete deck generates in the background while you stay in your editor. No context switch. No new tab.</p>
+      </div>
+
+      <div class="fg-card" style="display:none">
+        <div class="fg-media">
+          <div class="fg-placeholder"><i data-lucide="package-2" style="width:28px;height:28px"></i></div>
+        </div>
+        <h3>7 Export Formats</h3>
+        <p>Animated PPTX for the client. HTML for the website. PDF for print. Speaker Notes for your phone. Blog post for LinkedIn. Audience Brief for the follow-up. One deck. Seven deliverables.</p>
+      </div>
+
+    </div>
+    <!-- ── 9-card why grid ── -->
+    <div class="fg-wrap" style="padding-top:0">
+      <div class="why-grid-v2" id="whyGrid">
+
+        <!-- 1: Rehearsal Mode (7 cols) -->
+        <div class="wgc wgc-s7">
+          <div class="wgc-tag" style="background:rgba(167,139,250,.12);color:#a78bfa;border:1px solid rgba(167,139,250,.22)">Rehearsal Mode</div>
+          <div style="display:flex;gap:28px;align-items:flex-start">
+            <div style="flex-shrink:0;max-width:200px">
+              <div class="wgc-timer">
+                <span class="wgc-timer-n">02:45</span>
+                <div class="wgc-timer-meta">
+                  <span class="wgc-timer-l">avg per slide</span>
+                  <span class="wgc-timer-s">8 slides · 22:00 total</span>
+                </div>
+              </div>
+              <div class="wgc-h3">Full-screen.<br>Timed. AI-coached.</div>
+              <div class="wgc-p" style="margin-top:6px">Teleprompter, per-slide timers, AI pacing. Pause too long — AI flags it. Walk in knowing exactly how it goes.</div>
+            </div>
+            <div class="wgc-slide-rows" style="flex:1;margin-top:4px">
+              <div class="wgc-slide-r"><span class="wgc-slide-rn">1</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:82%;background:#a78bfa;transition-delay:.10s"></div></div><span class="wgc-slide-rs">2:10</span></div>
+              <div class="wgc-slide-r"><span class="wgc-slide-rn">2</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:65%;background:#a78bfa;transition-delay:.18s"></div></div><span class="wgc-slide-rs">1:42</span></div>
+              <div class="wgc-slide-r"><span class="wgc-slide-rn">3</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:91%;background:#a78bfa;transition-delay:.26s"></div></div><span class="wgc-slide-rs">2:24</span></div>
+              <div class="wgc-slide-r"><span class="wgc-slide-rn">4</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:78%;background:#a78bfa;transition-delay:.34s"></div></div><span class="wgc-slide-rs">2:03</span></div>
+              <div class="wgc-slide-r" style="background:rgba(251,191,36,.05);border-radius:5px;padding:2px 0"><span class="wgc-slide-rn" style="color:#fbbf24">5</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:44%;background:#fbbf24;transition-delay:.42s"></div></div><span class="wgc-slide-rs" style="color:#fbbf24">1:09 ⚡</span></div>
+              <div class="wgc-slide-r"><span class="wgc-slide-rn">6</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:88%;background:#a78bfa;transition-delay:.50s"></div></div><span class="wgc-slide-rs">2:19</span></div>
+              <div class="wgc-slide-r"><span class="wgc-slide-rn">7</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:72%;background:#a78bfa;transition-delay:.58s"></div></div><span class="wgc-slide-rs">1:54</span></div>
+              <div class="wgc-slide-r" style="background:rgba(34,197,94,.05);border-radius:5px;padding:2px 0"><span class="wgc-slide-rn" style="color:#22c55e">8</span><div class="wgc-slide-rt"><div class="wgc-slide-rf" style="width:95%;background:#22c55e;transition-delay:.66s"></div></div><span class="wgc-slide-rs" style="color:#22c55e">2:30 ✓</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2: Q&A Prep (5 cols) -->
+        <div class="wgc wgc-s5">
+          <div class="wgc-tag" style="background:rgba(244,114,182,.12);color:#f472b6;border:1px solid rgba(244,114,182,.22)">Q&amp;A Prep</div>
+          <div class="wgc-h3" style="margin-bottom:14px">The question<br>before they ask it.</div>
+          <div class="wgc-qa-list">
+            <div class="wgc-qa-item"><span class="wgc-qa-icon">?</span>"Where does the 88% stat come from?"</div>
+            <div class="wgc-qa-item"><span class="wgc-qa-icon">?</span>"How does this compare to competitors?"</div>
+            <div class="wgc-qa-item"><span class="wgc-qa-icon">?</span>"What's your path to profitability?"</div>
+          </div>
+          <div class="wgc-p" style="margin-top:8px">AI predicts 5–8 tough questions with full written answers. One click, before you go on stage.</div>
+        </div>
+
+        <!-- 3: Brand Kit (3 cols) -->
+        <div class="wgc wgc-s3">
+          <div class="wgc-tag" style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.22)">Brand Kit</div>
+          <div class="wgc-swatches">
+            <div class="wgc-swatch" style="background:#1a1a2e"></div>
+            <div class="wgc-swatch" style="background:#7b5cf6"></div>
+            <div class="wgc-swatch" style="background:#f8672f"></div>
+            <div class="wgc-swatch" style="background:#ffd0ba"></div>
+            <div class="wgc-swatch" style="background:#f0f0f0"></div>
+          </div>
+          <div class="wgc-font-chip">Space Grotesk · extracted</div>
+          <div class="wgc-h3">Your brand,<br>every deck.</div>
+          <div class="wgc-p" style="margin-top:6px">Upload a PPTX or brand file. Colors, fonts, logo — extracted and applied automatically.</div>
+        </div>
+
+        <!-- 4: Narrative Arc (5 cols) -->
+        <div class="wgc wgc-s5">
+          <div class="wgc-tag" style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid rgba(74,222,128,.22)">Narrative Arc</div>
+          <svg class="wgc-arc-svg" viewBox="0 0 300 56" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 48 C 35 48 42 12 82 22 S 132 42 162 16 S 212 6 242 26 S 272 36 295 20" class="wgc-arc-path" stroke="#4ade80"/>
+            <circle cx="5"   cy="48" r="3" fill="#4ade8055"/>
+            <circle cx="82"  cy="22" r="3" fill="#4ade8055"/>
+            <circle cx="162" cy="16" r="3" fill="#4ade8055"/>
+            <circle cx="242" cy="26" r="3" fill="#4ade8055"/>
+            <circle cx="295" cy="20" r="3" fill="#4ade8055"/>
+          </svg>
+          <div class="wgc-arc-beats"><span>Hook</span><span>Tension</span><span>Insight</span><span>Data</span><span>CTA</span></div>
+          <div class="wgc-h3">See the story<br>before it's built.</div>
+          <div class="wgc-p" style="margin-top:6px">Energy curve shows where your deck peaks and drops. Fix pacing before AI builds a single slide.</div>
+        </div>
+
+        <!-- 5: Video Call Mode (4 cols) -->
+        <div class="wgc wgc-s4">
+          <div class="wgc-tag" style="background:rgba(56,189,248,.12);color:#38bdf8;border:1px solid rgba(56,189,248,.22)">Video Call Mode</div>
+          <div class="wgc-vcall-win">
+            <div class="wgc-vcall-bar">
+              <div class="wgc-vcall-dots">
+                <div class="wgc-vcall-dot" style="background:#ff5f57"></div>
+                <div class="wgc-vcall-dot" style="background:#febc2e"></div>
+                <div class="wgc-vcall-dot" style="background:#28c840"></div>
+              </div>
+              <span class="wgc-vcall-title">PitchShow Slides — 1280×720</span>
+            </div>
+            <div class="wgc-vcall-body">
+              <div class="wgc-vcall-live"></div>
+              Sharing to Zoom · slide 4 of 12
+            </div>
+          </div>
+          <div class="wgc-h3">Present in Zoom.<br>Without sharing your screen.</div>
+          <div class="wgc-p" style="margin-top:6px">A dedicated window appears in your screen picker. Your notes and controls stay private.</div>
+        </div>
+
+        <!-- 6: 9 Visual Styles (3 cols) -->
+        <div class="wgc wgc-s3">
+          <div class="wgc-tag" style="background:rgba(99,102,241,.12);color:#818cf8;border:1px solid rgba(99,102,241,.22)">Visual Styles</div>
+          <div class="wgc-style-dots">
+            <div class="wgc-style-dot"></div><div class="wgc-style-dot"></div><div class="wgc-style-dot"></div>
+            <div class="wgc-style-dot"></div><div class="wgc-style-dot"></div><div class="wgc-style-dot"></div>
+            <div class="wgc-style-dot"></div><div class="wgc-style-dot"></div><div class="wgc-style-dot"></div>
+          </div>
+          <div class="wgc-h3">9 styles.<br>One click.</div>
+          <div class="wgc-p" style="margin-top:6px">Sci-fi to warm personal. Tech to minimal. Switch the entire identity of a deck instantly.</div>
+        </div>
+
+        <!-- 7: MCP Integration (3 cols) -->
+        <div class="wgc wgc-s3">
+          <div class="wgc-tag" style="background:rgba(6,182,212,.12);color:#22d3ee;border:1px solid rgba(6,182,212,.22)">MCP / IDE</div>
+          <div class="wgc-code-line">&gt; pitchshow_generate_deck<span class="wgc-code-cursor"></span></div>
+          <div class="wgc-h3">From your IDE,<br>not a new tab.</div>
+          <div class="wgc-p" style="margin-top:6px">Call it from Claude Code, Cursor, or Gemini CLI. The deck builds while you stay in your editor.</div>
+        </div>
+
+        <!-- 8: 7 Export Formats (3 cols) -->
+        <div class="wgc wgc-s3">
+          <div class="wgc-tag" style="background:rgba(249,115,22,.12);color:#fb923c;border:1px solid rgba(249,115,22,.22)">Export</div>
+          <div class="wgc-export-pills">
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">PPTX</span>
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">HTML</span>
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">PDF</span>
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">Notes</span>
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">Blog</span>
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">Brief</span>
+            <span class="wgc-export-pill" style="background:rgba(249,115,22,.08)">URL</span>
+          </div>
+          <div class="wgc-h3">One deck.<br>Seven deliverables.</div>
+          <div class="wgc-p" style="margin-top:6px">Animated PPTX, hosted URL, PDF, speaker notes, blog post, audience brief — all at once.</div>
+        </div>
+
+        <!-- 9: Audience Brief (3 cols) -->
+        <div class="wgc wgc-s3">
+          <div class="wgc-tag" style="background:rgba(20,184,166,.12);color:#2dd4bf;border:1px solid rgba(20,184,166,.22)">Audience Brief</div>
+          <div class="wgc-doc-lines">
+            <div class="wgc-doc-line" style="width:92%"></div>
+            <div class="wgc-doc-line" style="width:76%"></div>
+            <div class="wgc-doc-line" style="width:86%"></div>
+            <div class="wgc-doc-line" style="width:68%"></div>
+            <div class="wgc-doc-line" style="width:82%"></div>
+          </div>
+          <div class="wgc-h3">The follow-up,<br>written itself.</div>
+          <div class="wgc-p" style="margin-top:6px">Key points, citations, action items, reading list — one click after your talk, ready to send.</div>
+        </div>
+
+      </div><!-- /why-grid-v2 -->
+    </div>
+
+  </section>
+
+  <!-- ── QUOTES carousel ── -->
+  <section class="quotes-section">
+    <div class="q-track">
+      <div class="q-inner" id="qInner">
+        <div class="qc">
+          <div class="q-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"I typed my Series A thesis at 10pm. By 10:08 I had 12 slides with real research behind every number. I had never felt that prepared for a pitch."</p>
+          <div class="q-auth"><div class="q-av">JW</div><div><b>Jonas W.</b><span>Founder · Early access</span></div></div>
+        </div>
+        <div class="qc">
+          <div class="q-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"A board member challenged my market size stat mid-presentation. I opened the panel — McKinsey 2025, 1,491 enterprises, February. I read it out loud. The room went quiet in the good way."</p>
+          <div class="q-auth"><div class="q-av">SK</div><div><b>Sarah K.</b><span>Consultant · Early access</span></div></div>
+        </div>
+        <div class="qc">
+          <div class="q-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"I sent a link instead of the PPTX. My client opened it on mobile during his commute. He called me before I woke up — he'd already shared it with his team."</p>
+          <div class="q-auth"><div class="q-av">MC</div><div><b>Marcus C.</b><span>Product Manager · Early access</span></div></div>
+        </div>
+        <div class="qc">
+          <div class="q-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"The narrative arc showed me that my strongest point was buried on slide 9. I moved it to slide 3. The presentation landed completely differently. I'd never been the director of my own deck before."</p>
+          <div class="q-auth"><div class="q-av">TL</div><div><b>Thomas L.</b><span>Speaker · Early access</span></div></div>
+        </div>
+        <div class="qc">
+          <div class="q-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"I dropped my 2019 investor deck — clip art, Arial, zero animations. It came back with physics animations on every element. My same content. It looked like a completely different company."</p>
+          <div class="q-auth"><div class="q-av">AR</div><div><b>Aisha R.</b><span>Designer · Early access</span></div></div>
+        </div>
+        <div class="qc">
+          <div class="q-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+          <p>"I ran pitchshow_generate_deck during a code review. By the time I merged the PR, the technical architecture deck for the CTO was done. I didn't switch windows once."</p>
+          <div class="q-auth"><div class="q-av">DM</div><div><b>Dev M.</b><span>Engineer · Early access</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════════════════════════
+       COMPARISON TABLE
+  ══════════════════════════════════ -->
+  <section class="section-comp" id="moat">
+    <div class="comp-inner">
+      <div class="comp-head-text">
+        <div class="section-kicker">
+          <i data-lucide="bar-chart-2" style="width:12px;height:12px"></i>
+          The structural advantage
+        </div>
+        <h2>Why competitors<br/>can't catch up.</h2>
+        <p class="comp-sub">Not a feature gap. An architectural one.<br/>You'd have to rebuild everything from scratch.</p>
+      </div>
+      <div class="comp-table-wrap">
+        <table class="comp-tbl">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="ps-col">PitchShow</th>
+              <th>Gamma</th>
+              <th>Canva</th>
+              <th class="hide-xs">Beautiful.ai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Real animated output — not screenshots</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+            <tr><td>Animated PPTX — editable + moving</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-imp">impossible</td><td class="ct-imp">impossible</td><td class="ct-imp hide-xs">impossible</td></tr>
+            <tr><td>Point-and-click live editing</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-par">partial</td><td class="ct-par">partial</td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+            <tr><td>AI narrative arc + pacing check</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-par">partial</td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+            <tr><td>Deep research + Q&amp;A per slide</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+            <tr><td>100% fidelity web hosting</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-par">partial</td><td class="ct-par">partial</td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+            <tr><td>Google Stitch design pipeline</td><td class="ps-yes ps-nat">✓ natural</td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+            <tr><td>MCP / IDE integration</td><td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no"><i data-lucide="x" style="width:14px;height:14px"></i></td><td class="ct-no hide-xs"><i data-lucide="x" style="width:14px;height:14px"></i></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       FAQ
+  ══════════════════════════════════ -->
+  <section class="section-faq" id="faq">
+    <div class="faq-inner">
+      <div class="section-kicker">
+        <i data-lucide="help-circle" style="width:12px;height:12px"></i>
+        FAQ
+      </div>
+      <h2>Common questions.</h2>
+
+      <div class="faqs">
+        <div class="faq"><button class="fq">Is the desktop app really free?<i data-lucide="chevron-down"></i></button><div class="fa"><p>Yes. The full desktop app is Apache 2.0 — free forever, no credit card. Connect your own AI API key (Claude, OpenAI, DeepSeek, Gemini, Grok, Groq) and generate unlimited presentations locally. Cloud features are the paid tier: hosted AI, Animated PPTX export, and unlimited show hosting.</p></div></div>
+        <div class="faq"><button class="fq">What does Animated PPTX actually do?<i data-lucide="chevron-down"></i></button><div class="fa"><p>Open the exported file in PowerPoint and the animations are there. Titles fly in. Charts build. Transitions glide between slides. Background effects loop. Every word of text is still editable — click it, retype it. Other tools export flat images dressed up as slides. That's why they can never offer this, no matter how much they improve. We export the actual content.</p></div></div>
+        <div class="faq"><button class="fq">How does web hosting work?<i data-lucide="chevron-down"></i></button><div class="fa"><p>One click publishes your deck to <code>pitchshow.live/you/deck-title</code>. Anyone with the link can open it on any device — full animations, no software, no install, no "please open in Chrome" messages. It adapts to phone, tablet, and desktop automatically. Free tier: 1 hosted show. Pro: unlimited + custom domain.</p></div></div>
+        <div class="faq"><button class="fq">What is Vibe Mode?<i data-lucide="chevron-down"></i></button><div class="fa"><p>Click anything on a slide — a heading, a chart, an icon, a background element. A pin appears. Type what you want changed in plain English. The slide updates in under 2 seconds. No menus, no layers panel, no prompt engineering. Just: click the thing, say what you want, see it happen.</p></div></div>
+        <div class="faq"><button class="fq">Which AI providers are supported?<i data-lucide="chevron-down"></i></button><div class="fa"><p>AWS Bedrock (Claude), OpenAI, OpenRouter, DeepSeek, Gemini, Grok, Groq — plus any OpenAI-compatible endpoint. Claude Sonnet delivers the best results for full Spec Mode generation. All providers work well for Vibe Mode editing.</p></div></div>
+        <div class="faq"><button class="fq">What is the Google Stitch integration?<i data-lucide="chevron-down"></i></button><div class="fa"><p>Google Stitch (Google Labs) turns UI designs into working components. PitchShow turns those components into presentation slides. If you designed your product in Stitch, your product UI becomes your pitch deck automatically — without remaking anything. We're submitting a <code>pitchshow</code> skill to the Stitch repository to make this one click.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       DOWNLOAD CTA
+  ══════════════════════════════════ -->
+  <!-- ── Try it now (replaces "Ready for your first show?") ── -->
+  <section class="try-now" id="try-now">
+    <!-- Aurora -->
+    <div class="try-aurora" id="tryAurora">
+      <div class="try-aurora-inner">
+        <div class="ta-blob ta1"></div>
+        <div class="ta-blob ta2"></div>
+        <div class="ta-blob ta3"></div>
+      </div>
+    </div>
+
+    <div class="try-content">
+      <!-- Mascot with smile (V1 happy face) -->
+      <div class="try-peach">
+        <svg viewBox="0 0 48 48" fill="none" width="56" height="56">
+          <defs>
+            <radialGradient id="pg-try" cx="20" cy="14" r="30" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#FFF9F4"/>
+              <stop offset="52%"  stop-color="#FFE8D8"/>
+              <stop offset="100%" stop-color="#FFD0BA"/>
+            </radialGradient>
+          </defs>
+          <path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z" fill="url(#pg-try)"/>
+          <ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#3d6428" transform="rotate(20 27.5 9.5)"/>
+          <path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#5a3818" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="10" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.18)"/>
+          <ellipse cx="38" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.18)"/>
+          <path d="M12.5,29 Q16,24 19.5,29" stroke="#1a0810" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M28.5,29 Q32,24 35.5,29" stroke="#1a0810" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M21.5,35 Q24,37.5 26.5,35" stroke="#1a0810" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Mobile-only desktop hint -->
+      <div class="mobile-notice">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span><strong>Better on desktop</strong> — open pitchshow.ai on your laptop or computer for the full AI generation experience.</span>
+      </div>
+
+      <h2 class="try-h2">Ready for your first show?</h2>
+      <p class="try-sub">Your first 3 complete decks are free. No credit card.</p>
+
+      <!-- Tabs -->
+      <div class="try-tabs">
+        <button class="try-tab on" data-ttab="web">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Web — Start free
+        </button>
+        <button class="try-tab" data-ttab="desktop">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Desktop App
+        </button>
+        <button class="try-tab" data-ttab="mcp">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          MCP / IDE
+        </button>
+      </div>
+
+      <!-- Web panel -->
+      <div class="try-panel on" data-ttab="web" id="tryWebPanel">
+        <div class="tpb" id="tryPBox">
+          <div id="tryPDefault">
+            <textarea class="tpta" id="tryPInput" placeholder="What's your presentation about?" rows="3"></textarea>
+            <div class="tpfoot">
+              <button class="tpplus" title="Attach">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="tppills" id="tryTypePills">
+                <button class="tppill on">🎯 Pitch</button>
+                <button class="tppill">📈 Sales</button>
+                <button class="tppill">📊 Report</button>
+                <button class="tppill">💡 Teach</button>
+              </div>
+              <div class="tpmodel">
+                <span class="mdot-p"></span> Claude Sonnet
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+              <button class="tpsend" id="trySendBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="tel-layer" id="tryEmailLayer">
+            <div class="tel-prev" id="tryEmailPrev"></div>
+            <div class="tel-msg">PitchShow Web is launching soon — get early access.</div>
+            <div class="tel-row">
+              <input class="tel-in" type="email" id="tryEmailIn" placeholder="your@email.com" autocomplete="email"/>
+              <button class="tel-sub" id="tryEmailSub">Notify me</button>
+            </div>
+            <div class="tel-ok" id="tryEmailOk">You're on the list. We'll reach out when it's ready.</div>
+          </div>
+        </div>
+        <div class="tpchips" id="tryChips">
+          <span class="tpchip">"A pitch deck for a B2B SaaS startup"</span>
+          <span class="tpchip">"Q2 results for the leadership team"</span>
+          <span class="tpchip">"Why we should open-source our SDK"</span>
+          <span class="tpchip">"Product launch to investors"</span>
+        </div>
+        <div class="tpnote">No install. No API key. Full AI generation — free for your first 3 decks.</div>
+      </div>
+
+      <!-- Desktop panel -->
+      <div class="try-panel" data-ttab="desktop">
+        <div class="try-dl-card">
+          <div class="try-dl-icon">🖥️</div>
+          <div class="try-dl-h">Download the Mac app</div>
+          <div class="try-dl-p">Bring your own API key. Runs fully local — your data never leaves your machine.</div>
+          <a href="./get-started.html#download" class="try-btn-dl">
+            Download Mac Client
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+          <div class="try-dl-note">macOS 13+ · Apple Silicon · Intel · Free forever with BYOK</div>
+        </div>
+      </div>
+
+      <!-- MCP panel -->
+      <div class="try-panel" data-ttab="mcp">
+        <div class="try-mcp-card">
+          <div class="try-mcp-lbl">Add to your IDE or agent pipeline</div>
+          <div class="try-code">npx pitchshow-mcp init</div>
+          <div class="try-mcp-p">Connect to Claude Desktop, Cursor, or any MCP-compatible IDE. Type <code style="color:#a78bfa">/pitch</code> and generate decks without leaving your editor.</div>
+          <div style="margin-top:18px"><a href="./docs.html#mcp" style="color:#a78bfa;font-size:14px;font-weight:600">Read the MCP docs →</a></div>
+        </div>
+      </div>
+    </div><!-- /try-content -->
+  </section>
+
+  <!-- ── OSS BAND ── -->
+  <div class="oss-band">
+    <div class="oss-inner">
+      <div class="oss-ico">
+        <i data-lucide="github" style="width:24px;height:24px"></i>
+      </div>
+      <div class="oss-txt">
+        <h3>Open source, always.</h3>
+        <p>The desktop core is Apache 2.0. Fork it. Build on it. Run it yourself.</p>
+      </div>
+      <a href="https://github.com/pitchshow/pitchshow" class="oss-btn" target="_blank">
+        Star on GitHub
+        <i data-lucide="external-link" style="width:12px;height:12px"></i>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="./index.html" class="sb-logo footer-logo">
+          <svg width="20" height="20" viewBox="0 0 48 48" fill="none"><defs><radialGradient id="pg-small" cx="20" cy="14" r="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFF9F4"/><stop offset="52%" stop-color="#FFE8D8"/><stop offset="100%" stop-color="#FFD0BA"/></radialGradient></defs><path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z" fill="url(#pg-small)"/><ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#3d6428" transform="rotate(20 27.5 9.5)"/><path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#5a3818" stroke-width="1.3" fill="none" stroke-linecap="round"/><ellipse cx="10" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.15)"/><ellipse cx="38" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.15)"/><circle cx="16" cy="27" r="2.2" fill="#1a0810"/><circle cx="32" cy="27" r="2.2" fill="#1a0810"/></svg>
+          <span>PitchShow</span>
+        </a>
+        <p>Pitch an idea.<br/>Walk out with a show.</p>
+        <div class="f-soc">
+          <a href="https://github.com/pitchshow/pitchshow" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://x.com/pitchshowai" target="_blank" title="X / Twitter @pitchshowai"><i data-lucide="twitter"></i></a>
+          <a href="https://youtube.com/@PitchShowAI" target="_blank" title="YouTube @PitchShowAI"><i data-lucide="youtube"></i></a>
+          <a href="https://instagram.com/pitchshowai" target="_blank" title="Instagram @pitchshowai"><i data-lucide="instagram"></i></a>
+          <a href="https://tiktok.com/@pitchshowai" target="_blank" title="TikTok @pitchshowai">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.77 1.52V7.17a4.85 4.85 0 01-1-.48z"/></svg>
+          </a>
+          <a href="https://discord.gg/pitchshow" target="_blank" title="Discord">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          </a>
+          <a href="https://reddit.com/r/pitchshow" target="_blank" title="Reddit r/pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </a>
+          <a href="https://producthunt.com/@pitchshow" target="_blank" title="Product Hunt @pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.604 8.4h-3.405V12h3.405a1.8 1.8 0 000-3.6zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4H10.2v3.6H7.8V6h5.804a4.2 4.2 0 010 8.4z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="f-col"><h4>Product</h4><ul><li><a href="./get-started.html">Get started</a></li><li><a href="./styles.html">Styles</a></li><li><a href="./pricing.html">Pricing</a></li><li><a href="#">Changelog<span class="cs-note">soon</span></a></li></ul></div>
+      <div class="f-col"><h4>Learn</h4><ul><li><a href="./docs.html">Documentation</a></li><li><a href="./docs.html">MCP Setup</a></li><li><a href="./blog.html">Blog</a></li><li><a href="./community.html">Community</a></li></ul></div>
+      <div class="f-col"><h4>Company</h4><ul><li><a href="./enterprise.html">Enterprise</a></li><li><a href="./support.html">Support</a></li><li><a href="mailto:hello@pitchshow.ai">Contact</a></li><li><a href="./privacy.html">Privacy</a></li></ul></div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 PitchShow · Apache 2.0 for the desktop app</span>
+      <span>hello@pitchshow.ai</span>
+    </div>
+  </footer>
+
+</main><!-- /main -->
+
+<script src="vendor/lucide.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="app.js"></script>
+
+<script>
+/* ── V2 Floating Nav ── */
+(function(){
+  var nav = document.getElementById('v2nav');
+  if(!nav) return;
+  function u(){ nav.classList.toggle('scrolled', window.scrollY > 80); }
+  window.addEventListener('scroll', u, {passive:true});
+  u();
+})();
+
+/* ── M3 dual-column feature observer ── */
+(function(){
+  var secs   = Array.from(document.querySelectorAll('.feat-m3-section'));
+  var panels = Array.from(document.querySelectorAll('.feat-m3-panel'));
+  if(!secs.length) return;
+  var cur = 0;
+  function set(i){
+    if(i===cur) return;
+    secs[cur].classList.remove('on'); panels[cur].classList.remove('on');
+    cur=i;
+    secs[cur].classList.add('on'); panels[cur].classList.add('on');
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) set(+e.target.dataset.fi); });
+  },{threshold:0.42,rootMargin:'-12% 0px -12% 0px'});
+  secs.forEach(function(s){ io.observe(s); });
+})();
+
+/* ── Try-now tabs ── */
+(function(){
+  var tabs   = Array.from(document.querySelectorAll('.try-tab'));
+  var panels = Array.from(document.querySelectorAll('.try-panel'));
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var t = tab.dataset.ttab;
+      tabs.forEach(function(tb){ tb.classList.toggle('on', tb.dataset.ttab===t); });
+      panels.forEach(function(p){ p.classList.toggle('on', p.dataset.ttab===t); });
+    });
+  });
+})();
+
+/* ── Try-now: type pills ── */
+document.getElementById('tryTypePills').addEventListener('click', function(e){
+  var p = e.target.closest('.tppill');
+  if(!p) return;
+  document.querySelectorAll('#tryTypePills .tppill').forEach(function(x){ x.classList.remove('on'); });
+  p.classList.add('on');
+});
+
+/* ── Try-now: send button ready state ── */
+var tryInput = document.getElementById('tryPInput');
+var trySend  = document.getElementById('trySendBtn');
+if(tryInput && trySend){
+  tryInput.addEventListener('input', function(){
+    trySend.classList.toggle('ready', tryInput.value.trim().length>0);
+  });
+  trySend.addEventListener('click', function(){
+    var v = tryInput.value.trim();
+    if(!v){ tryInput.focus(); return; }
+    document.getElementById('tryEmailPrev').textContent = '"'+v.slice(0,80)+(v.length>80?'…':'')+'"';
+    document.getElementById('tryPDefault').style.display = 'none';
+    document.getElementById('tryChips').style.display = 'none';
+    var el = document.getElementById('tryEmailLayer');
+    el.classList.add('vis');
+    setTimeout(function(){ document.getElementById('tryEmailIn').focus(); }, 50);
+  });
+  tryInput.addEventListener('keydown', function(e){
+    if((e.metaKey||e.ctrlKey) && e.key==='Enter') trySend.click();
+  });
+}
+
+/* ── Try-now: chips ── */
+var tryChips = document.getElementById('tryChips');
+if(tryChips){
+  tryChips.addEventListener('click', function(e){
+    var c = e.target.closest('.tpchip');
+    if(!c || !tryInput) return;
+    tryInput.value = c.textContent.replace(/^[""]|[""]$/g,'').trim();
+    tryInput.focus();
+    if(trySend) trySend.classList.add('ready');
+  });
+}
+
+/* ── Try-now: email submit ── */
+var tryEmailSub = document.getElementById('tryEmailSub');
+if(tryEmailSub){
+  tryEmailSub.addEventListener('click', function(){
+    var em = document.getElementById('tryEmailIn').value.trim();
+    if(!em||!em.includes('@')){ document.getElementById('tryEmailIn').focus(); return; }
+    try{ localStorage.setItem('ps_waitlist_email', em); }catch(ex){}
+    document.getElementById('tryEmailIn').style.display = 'none';
+    tryEmailSub.style.display = 'none';
+    document.getElementById('tryEmailOk').style.display = 'block';
+  });
+  document.getElementById('tryEmailIn').addEventListener('keydown', function(e){
+    if(e.key==='Enter') tryEmailSub.click();
+  });
+}
+
+/* ── Why Grid: scroll reveal ── */
+(function(){
+  var cards = Array.from(document.querySelectorAll('.wgc'));
+  if(!cards.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  cards.forEach(function(c){ io.observe(c); });
+})();
+
+/* ── Try-now aurora + footer aurora ── */
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('vis'); });
+  },{threshold:0.05});
+  ['tryAurora'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) io.observe(el);
+  });
+})();
+
+/* ── Mobile nav toggle ── */
+(function(){
+  var btn  = document.getElementById('v2Hamburger');
+  var menu = document.getElementById('v2MobileMenu');
+  if(!btn || !menu) return;
+  var isOpen = false;
+  function setOpen(v){
+    isOpen = v;
+    btn.setAttribute('aria-expanded', v);
+    menu.setAttribute('aria-hidden', !v);
+    menu.classList.toggle('open', v);
+    btn.innerHTML = v
+      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>'
+      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  }
+  btn.addEventListener('click', function(){ setOpen(!isOpen); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+  document.addEventListener('click', function(e){
+    if(isOpen && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+})();
+</script>
+</body>
+</html>

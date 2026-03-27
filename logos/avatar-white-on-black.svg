@@ -1,0 +1,14 @@
+<!-- PitchShow — White Peach on Pure Black, 400×400px -->
+<!-- Use on: print materials, monochrome contexts, high contrast needs -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="400" height="400">
+  <circle cx="24" cy="24" r="24" fill="#000000"/>
+  <g transform="translate(0,-2)">
+    <path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z" fill="white"/>
+    <ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#52B03C" transform="rotate(20 27.5 9.5)"/>
+    <path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#3a7020" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="10" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,100,80,0.22)"/>
+    <ellipse cx="38" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,100,80,0.22)"/>
+    <circle cx="16" cy="27" r="2.2" fill="#1a0810"/>
+    <circle cx="32" cy="27" r="2.2" fill="#1a0810"/>
+  </g>
+</svg>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PitchShow — Pricing</title>
+<meta name="description" content="Start free. Pro plans give you hosted AI across Claude, GPT-4o, Gemini and more — no API keys, no counting tokens."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="page.css"/>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad" cx="40%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="#FFF9F4"/>
+      <stop offset="52%" stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+<aside class="sidebar" id="sidebar">
+  <button class="sb-search" id="sbSearch" title="Search" aria-label="Search">
+    <i data-lucide="search"></i>
+  </button>
+  <nav class="sb-nav">
+    <a href="./index.html" class="sb-item" title="Home">
+      <div class="sb-icon"><i data-lucide="home"></i></div>
+      <span class="sb-label">Home</span>
+    </a>
+    <a href="./get-started.html" class="sb-item" title="Get started">
+      <div class="sb-icon"><i data-lucide="rocket"></i></div>
+      <span class="sb-label">Start</span>
+    </a>
+    <a href="./styles.html" class="sb-item" title="Styles">
+      <div class="sb-icon"><i data-lucide="palette"></i></div>
+      <span class="sb-label">Styles</span>
+    </a>
+    <a href="./docs.html" class="sb-item" title="Docs">
+      <div class="sb-icon"><i data-lucide="book-open"></i></div>
+      <span class="sb-label">Docs</span>
+    </a>
+    <a href="./community.html" class="sb-item" title="Community">
+      <div class="sb-icon"><i data-lucide="users"></i></div>
+      <span class="sb-label">Community</span>
+    </a>
+    <a href="./blog.html" class="sb-item" title="Blog">
+      <div class="sb-icon"><i data-lucide="newspaper"></i></div>
+      <span class="sb-label">Blog</span>
+    </a>
+  </nav>
+  <nav class="sb-nav sb-nav-bottom">
+    <a href="./pricing.html" class="sb-item active" title="Pricing">
+      <div class="sb-icon"><i data-lucide="credit-card"></i></div>
+      <span class="sb-label">Pricing</span>
+    </a>
+    <a href="./support.html" class="sb-item" title="Support">
+      <div class="sb-icon"><i data-lucide="life-buoy"></i></div>
+      <span class="sb-label">Support</span>
+    </a>
+    <a href="./enterprise.html" class="sb-item" title="Enterprise">
+      <div class="sb-icon"><i data-lucide="building-2"></i></div>
+      <span class="sb-label">Business</span>
+    </a>
+  </nav>
+  <div class="sb-footer">
+    <a href="https://github.com/pitchshow/pitchshow" class="sb-icon-btn" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+    <div class="f-soc">
+          <a href="https://github.com/pitchshow/pitchshow" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://x.com/pitchshowai" target="_blank" title="X / Twitter @pitchshowai"><i data-lucide="twitter"></i></a>
+          <a href="https://youtube.com/@PitchShowAI" target="_blank" title="YouTube @PitchShowAI"><i data-lucide="youtube"></i></a>
+          <a href="https://instagram.com/pitchshowai" target="_blank" title="Instagram @pitchshowai"><i data-lucide="instagram"></i></a>
+          <a href="https://tiktok.com/@pitchshowai" target="_blank" title="TikTok @pitchshowai">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.77 1.52V7.17a4.85 4.85 0 01-1-.48z"/></svg>
+          </a>
+          <a href="https://discord.gg/pitchshow" target="_blank" title="Discord">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          </a>
+          <a href="https://reddit.com/r/pitchshow" target="_blank" title="Reddit r/pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </a>
+          <a href="https://producthunt.com/@pitchshow" target="_blank" title="Product Hunt @pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.604 8.4h-3.405V12h3.405a1.8 1.8 0 000-3.6zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4H10.2v3.6H7.8V6h5.804a4.2 4.2 0 010 8.4z"/></svg>
+          </a>
+        </div>
+    <!-- sign-in button: visible after Cloud launch -->
+  </div>
+</aside>
+
+<main class="main pg">
+
+  <!-- ── Hero ── -->
+  <div class="pg-hero">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="pg-hero-inner">
+      <div class="pg-kicker gs-up">Pricing</div>
+      <h1 class="pg-h1 gs-up">Start free.<br/>Scale when you're ready.</h1>
+      <p class="pg-sub gs-up">Desktop app is open source — free forever, bring your own key.<br/>Cloud plans include hosted AI. No tokens to count. Never blocked.</p>
+
+<!-- billing toggle moved below to price cards section -->
+    </div>
+  </div>
+
+  <!-- ── Pricing cards ── -->
+  <div class="pg-section" id="priceSection">
+    <div class="pg-wrap">
+
+      <!-- Billing toggle -->
+      <div class="price-toggle" id="billingToggle" style="justify-content:center;margin-bottom:40px">
+        <button class="ptg-opt" data-billing="monthly">Monthly</button>
+        <button class="ptg-opt active" data-billing="annual">
+          Annual
+          <span class="ptg-save">Save 31%</span>
+        </button>
+      </div>
+
+      <div class="price-cards">
+
+        <!-- Open Source -->
+        <div class="pc">
+          <div class="pc-tier">Open Source</div>
+          <div class="pc-price-row"><span class="pc-amount">Free</span></div>
+          <div class="pc-note">Apache 2.0. Forever. No card needed.</div>
+          <ul class="pc-list">
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Desktop app — Mac, Win, Linux</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Unlimited presentations</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Bring your own API key</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Full Spec Mode + Vibe Mode</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Presenter Mode + Rehearsal</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>PDF, PPTX, HTML export</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>MCP integration</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>1 hosted show</li>
+          </ul>
+          <a href="./get-started.html" class="pc-btn pc-ghost">Download free</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="pc pc-featured">
+          <div class="pc-badge">Most Popular</div>
+          <div class="pc-tier">Pro</div>
+          <div class="pc-price-row">
+            <span class="pc-amount price-mo">$12</span>
+            <span class="pc-amount price-yr" style="display:none">$8<span style="font-size:20px">.25</span></span>
+            <span class="pc-per">/month</span>
+          </div>
+          <div class="pc-note price-mo">Billed monthly. Cancel anytime.</div>
+          <div class="pc-note price-yr" style="display:none">$99 billed annually — save $45.</div>
+          <ul class="pc-list">
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Everything in Free</li>
+            <li><i data-lucide="check" class="acc" style="width:13px;height:13px"></i><strong>Hosted AI</strong> — no API key needed</li>
+            <li><i data-lucide="check" class="acc" style="width:13px;height:13px"></i><strong>Animated PPTX</strong> export</li>
+            <li><i data-lucide="check" class="acc" style="width:13px;height:13px"></i>Unlimited hosted shows</li>
+            <li><i data-lucide="check" class="acc" style="width:13px;height:13px"></i>Industry templates</li>
+            <li><i data-lucide="check" class="acc" style="width:13px;height:13px"></i>20+ visual styles</li>
+            <li><i data-lucide="check" class="acc" style="width:13px;height:13px"></i>Cloud storage + version history</li>
+            <li class="price-yr" style="display:none"><i data-lucide="gift" class="acc" style="width:13px;height:13px;color:#3ddb8a"></i><span style="color:#3ddb8a"><strong>Brand Kit</strong> + Custom domain</span></li>
+          </ul>
+          <a href="#" class="pc-btn pc-primary" data-waitlist>Get Pro</a>
+          <span style="display:block;font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;text-align:center;letter-spacing:.05em;text-transform:uppercase">Coming soon</span>
+        </div>
+
+        <!-- Team -->
+        <div class="pc">
+          <div class="pc-tier">Team</div>
+          <div class="pc-price-row">
+            <span class="pc-amount price-mo">$49</span>
+            <span class="pc-amount price-yr" style="display:none">$33<span style="font-size:20px">.25</span></span>
+            <span class="pc-per">/month</span>
+          </div>
+          <div class="pc-note price-mo">Up to 5 seats. Billed monthly.</div>
+          <div class="pc-note price-yr" style="display:none">$399/year · 5 seats · save $189.</div>
+          <ul class="pc-list">
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Everything in Pro</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Shared workspace</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Collaborative editing</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Team template library</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Brand Kit for whole team</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Claude Sonnet 20 decks/mo shared</li>
+            <li><i data-lucide="check" style="width:13px;height:13px"></i>Usage analytics + Priority support</li>
+          </ul>
+          <a href="#" class="pc-btn pc-ghost" data-waitlist>Get Team</a>
+          <span style="display:block;font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;text-align:center;letter-spacing:.05em;text-transform:uppercase">Coming soon</span>
+        </div>
+
+      </div><!-- /price-cards -->
+
+      <!-- $5 One-time pass strip -->
+      <div class="pc-pass-strip" style="margin-top:16px">
+        <div class="pc-pass-left">
+          <div class="pc-pass-title">Not ready to subscribe?</div>
+          <div class="pc-pass-sub">Get a one-time pass — one complete deck with Animated PPTX export and a 30-day hosted URL.</div>
+        </div>
+        <div class="pc-pass-right">
+          <div class="pc-pass-price">$5</div>
+          <a href="#" class="pc-btn pc-ghost" data-waitlist style="white-space:nowrap">One-time pass</a>
+        </div>
+      </div>
+
+      <!-- Enterprise CTA -->
+      <p class="pc-ent" style="margin-top:32px">
+        Enterprise — SSO, custom branding, unlimited seats.
+        <a href="./enterprise.html">See Enterprise plan <i data-lucide="arrow-right" style="width:12px;height:12px;display:inline"></i></a>
+        <br/><small style="color:rgba(255,255,255,.25);font-size:12px">hello@pitchshow.ai · support@pitchshow.ai</small>
+      </p>
+
+    </div>
+  </div>
+
+    <!-- ── How AI works ── -->
+  <div class="pg-section" style="background:var(--bg1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="cpu" style="width:12px;height:12px"></i>AI models</div>
+      <h2 class="section-h2 gs-card">Premium AI when it matters. Always-on when it doesn't.</h2>
+      <p class="pg-lead gs-card">No token counting, no surprise bills. Pro gives you a pool of premium AI — Claude Haiku for everyday generation, Claude Sonnet for your most important pitches. When you've used your Sonnet quota, generation continues automatically with our fallback AI. You never stop working.</p>
+
+      <div class="cr-model-grid gs-card">
+        <div class="cr-model-head">
+          <span>Model</span>
+          <span>Availability</span>
+          <span>Best for</span>
+          <span>Tier</span>
+        </div>
+
+        <div class="cr-model-row">
+          <div class="cr-model-name">
+            <span class="cr-dot" style="background:#4ade80"></span>
+            DeepSeek V3
+          </div>
+          <div style="font-size:12px;color:var(--tx2)">Free trial (first 3 decks)</div>
+          <div class="cr-desc">Research, structured drafts, first-time experience</div>
+          <div class="cr-plans"><span>Free</span></div>
+        </div>
+
+        <div class="cr-model-row">
+          <div class="cr-model-name">
+            <span class="cr-dot" style="background:#fbbf24"></span>
+            Claude Haiku 4.5
+            <span style="font-size:10px;padding:2px 6px;background:rgba(251,191,36,.12);color:#fbbf24;border-radius:100px;white-space:nowrap">Default</span>
+          </div>
+          <div style="font-size:12px;color:var(--tx2)">Unlimited</div>
+          <div class="cr-desc">Everyday generation — fast, capable, cost-effective</div>
+          <div class="cr-plans"><span>Pro</span><span>Team</span></div>
+        </div>
+
+        <div class="cr-model-row cr-model-rec">
+          <div class="cr-model-name">
+            <span class="cr-dot" style="background:#f97316"></span>
+            Claude Sonnet 4.5
+            <span class="cr-rec-badge">★ Best for English</span>
+          </div>
+          <div style="font-size:12px;color:var(--tx2)">
+            <span class="price-mo">5 decks/mo (monthly)</span>
+            <span class="price-yr" style="display:none"><strong style="color:#3ddb8a">10 decks/mo (annual)</strong></span>
+          </div>
+          <div class="cr-desc">Highest narrative quality — pitch storytelling, polished English, persuasive structure</div>
+          <div class="cr-plans"><span>Pro</span><span>Team</span></div>
+        </div>
+
+        <div class="cr-model-row">
+          <div class="cr-model-name">
+            <span class="cr-dot" style="background:#6b7280"></span>
+            Fallback AI
+          </div>
+          <div style="font-size:12px;color:var(--tx2)">Unlimited · auto-switch</div>
+          <div class="cr-desc">Kicks in automatically when Sonnet quota is used — generation never stops</div>
+          <div class="cr-plans"><span>Pro</span><span>Team</span></div>
+        </div>
+
+        <div class="cr-model-row">
+          <div class="cr-model-name">
+            <span class="cr-dot" style="background:#a78bfa"></span>
+            Your own model
+          </div>
+          <div style="font-size:12px;color:var(--tx2)">Unlimited (BYOK)</div>
+          <div class="cr-desc">Connect any provider via API key — Gemini, GPT-4o, Groq, custom endpoints</div>
+          <div class="cr-plans"><span>Free Desktop</span></div>
+        </div>
+
+      </div>
+
+      <!-- Never blocked callout -->
+      <div class="pc-never-blocked gs-card">
+        <div class="pc-nb-icon"><i data-lucide="shield-check" style="width:22px;height:22px"></i></div>
+        <div>
+          <div class="pc-nb-title">You will never be blocked mid-generation.</div>
+          <div class="pc-nb-sub">Sonnet quota runs out → Haiku continues → fallback AI continues. Every export, every hosted show stays live. If you want more Sonnet, upgrade to annual — your quota doubles.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Comparison table ── -->
+  <div class="pg-section">
+    <div class="pg-wrap">
+      <div class="price-compare gs-card">
+        <h2 class="compare-title">Feature comparison</h2>
+        <table class="comp-tbl">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Free Desktop</th>
+              <th>Free Web</th>
+              <th class="th-ps">Pro</th>
+              <th>Team</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Spec Mode + Vibe Mode</td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+            </tr>
+            <tr>
+              <td>Hosted AI (we pay)</td>
+              <td class="ct-no">–</td>
+              <td class="ct-par">First 3 decks</td>
+              <td class="ps-yes">Unlimited</td>
+              <td class="ps-yes">Unlimited</td>
+            </tr>
+            <tr>
+              <td>Claude Sonnet quota</td>
+              <td class="ct-no">–</td>
+              <td class="ct-no">–</td>
+              <td class="ct-par">5 / mo &nbsp;·&nbsp; 10 / mo annual</td>
+              <td class="ct-par">20 / mo &nbsp;·&nbsp; 40 / mo annual</td>
+            </tr>
+            <tr>
+              <td><strong>Animated PPTX</strong></td>
+              <td class="ct-no">–</td>
+              <td class="ct-no">–</td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+            </tr>
+            <tr>
+              <td>Hosted shows</td>
+              <td class="ct-par">1</td>
+              <td class="ct-par">1</td>
+              <td class="ps-yes">Unlimited</td>
+              <td class="ps-yes">Unlimited</td>
+            </tr>
+            <tr>
+              <td>Industry templates</td>
+              <td class="ct-no">–</td>
+              <td class="ct-no">–</td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+            </tr>
+            <tr>
+              <td>Brand Kit</td>
+              <td class="ct-no">–</td>
+              <td class="ct-no">–</td>
+              <td class="ct-par">Annual plan</td>
+              <td class="ct-par">Annual plan</td>
+            </tr>
+            <tr>
+              <td>Team workspace</td>
+              <td class="ct-no">–</td>
+              <td class="ct-no">–</td>
+              <td class="ct-no">–</td>
+              <td class="ps-yes"><i data-lucide="check" style="width:14px;height:14px"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div class="pg-section" style="background:var(--bg1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)">
+    <div class="pg-wrap">
+      <div class="price-faq">
+        <h2 class="gs-card" style="margin-bottom:24px">Pricing questions</h2>
+        <div class="faqs">
+
+          <div class="faq gs-card">
+            <button class="fq">What happens when I run out of Claude Sonnet quota?<i data-lucide="chevron-down"></i></button>
+            <div class="fa"><p>Generation continues automatically — PitchShow switches to our fallback AI without interrupting your work. You'll see a subtle indicator in the UI. Your existing hosted shows, exported files, and projects are never affected. To get more Sonnet, either wait for next month's reset or upgrade to annual (your quota doubles from 5 to 10 decks per month).</p></div>
+          </div>
+
+          <div class="faq gs-card">
+            <button class="fq">What is Claude Haiku vs Sonnet — which should I use?<i data-lucide="chevron-down"></i></button>
+            <div class="fa"><p><strong>Claude Haiku 4.5</strong> is fast and capable — it handles everyday presentations, research, and iterations perfectly well. Most decks in most situations will be excellent with Haiku. <strong>Claude Sonnet 4.5</strong> produces noticeably higher narrative quality: tighter structure, more persuasive English, better pitch storytelling. Use Sonnet for your most important presentations — investor pitches, major client proposals, and keynote talks. Save Haiku for drafts and routine work.</p></div>
+          </div>
+
+          <div class="faq gs-card">
+            <button class="fq">What does the $5 one-time pass include?<i data-lucide="chevron-down"></i></button>
+            <div class="fa"><p>The $5 pass gives you one complete deck generation with Claude Haiku, one Animated PPTX export, and a hosted show URL that stays live for 30 days. It's designed for people with a one-off need — a pitch tomorrow, a presentation for a job interview, a single client proposal. No subscription, no renewal, no commitment.</p></div>
+          </div>
+
+          <div class="faq gs-card">
+            <button class="fq">Why go annual? What does Brand Kit actually do?<i data-lucide="chevron-down"></i></button>
+            <div class="fa"><p>Annual gives you two concrete advantages over monthly: <strong>(1) Sonnet quota doubles</strong> — 10 decks per month instead of 5. <strong>(2) Brand Kit</strong> — PitchShow remembers your brand colors, fonts, logo, and communication style across every deck you make. By your 10th deck, the AI generates content that sounds and looks like it was written by someone who knows your company inside out. Brand Kit compounds over time, making the product more valuable the longer you use it. Plus you save 31% and lock in today's pricing.</p></div>
+          </div>
+
+          <div class="faq gs-card">
+            <button class="fq">Is the desktop app really free forever?<i data-lucide="chevron-down"></i></button>
+            <div class="fa"><p>Yes — Apache 2.0 open source, forever, no credit card required. You bring your own API key from any provider (Claude, OpenAI, Gemini, DeepSeek, Groq, and more) and generate unlimited presentations locally on your machine. The only things that require a paid cloud plan are server-side features: hosted AI (we pay for tokens), Animated PPTX (server-side processing), and cloud hosting for your shows.</p></div>
+          </div>
+
+          <div class="faq gs-card">
+            <button class="fq">Can I cancel anytime?<i data-lucide="chevron-down"></i></button>
+            <div class="fa"><p>Yes. Cancel from your account settings at any time. Your hosted shows stay live until the end of your current billing period. After that, you can download your projects as <code>.pitchshow</code> bundles and continue using the free desktop app with your own API key. Nothing is lost.</p></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="vendor/lucide.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="page.js"></script>
+<script>
+// ── Billing toggle (default: annual) ──
+(function() {
+  const toggle = document.getElementById('billingToggle');
+  if (!toggle) return;
+  const btns = toggle.querySelectorAll('.ptg-opt');
+
+  function applyBilling(annual) {
+    document.querySelectorAll('.price-mo').forEach(el => {
+      el.style.display = annual ? 'none' : '';
+    });
+    document.querySelectorAll('.price-yr').forEach(el => {
+      el.style.display = annual ? '' : 'none';
+    });
+  }
+
+  // Init: annual is active by default
+  applyBilling(true);
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyBilling(btn.dataset.billing === 'annual');
+    });
+  });
+})();
+</script>
+</body>
+</html>

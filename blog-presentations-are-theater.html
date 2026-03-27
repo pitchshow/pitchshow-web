@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Presentations are theater. We've been building the wrong tool. — PitchShow Blog</title>
+<meta name="description" content="Every slide app asks: how do I make this look good? Nobody asks: how does this person want the audience to feel at the end? That question is why PitchShow exists."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="page.css"/>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad" cx="40%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="#FFF9F4"/>
+      <stop offset="52%" stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+<aside class="sidebar" id="sidebar">
+  <button class="sb-search" id="sbSearch" title="Search" aria-label="Search">
+    <i data-lucide="search"></i>
+  </button>
+  <nav class="sb-nav">
+    <a href="./index.html" class="sb-item" title="Home"><div class="sb-icon"><i data-lucide="home"></i></div><span class="sb-label">Home</span></a>
+    <a href="./get-started.html" class="sb-item" title="Get started"><div class="sb-icon"><i data-lucide="rocket"></i></div><span class="sb-label">Start</span></a>
+    <a href="./styles.html" class="sb-item" title="Styles"><div class="sb-icon"><i data-lucide="palette"></i></div><span class="sb-label">Styles</span></a>
+    <a href="./docs.html" class="sb-item" title="Docs"><div class="sb-icon"><i data-lucide="book-open"></i></div><span class="sb-label">Docs</span></a>
+    <a href="./community.html" class="sb-item" title="Community"><div class="sb-icon"><i data-lucide="users"></i></div><span class="sb-label">Community</span></a>
+    <a href="./blog.html" class="sb-item active" title="Blog"><div class="sb-icon"><i data-lucide="newspaper"></i></div><span class="sb-label">Blog</span></a>
+  </nav>
+  <nav class="sb-nav sb-nav-bottom">
+    <a href="./pricing.html" class="sb-item" title="Pricing"><div class="sb-icon"><i data-lucide="credit-card"></i></div><span class="sb-label">Pricing</span></a>
+    <a href="./support.html" class="sb-item" title="Support"><div class="sb-icon"><i data-lucide="life-buoy"></i></div><span class="sb-label">Support</span></a>
+    <a href="./enterprise.html" class="sb-item" title="Enterprise"><div class="sb-icon"><i data-lucide="building-2"></i></div><span class="sb-label">Business</span></a>
+  </nav>
+  <div class="sb-footer">
+    <a href="https://github.com/pitchshow/pitchshow" class="sb-icon-btn" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+    <div class="f-soc">
+          <a href="https://github.com/pitchshow/pitchshow" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://x.com/pitchshowai" target="_blank" title="X / Twitter @pitchshowai"><i data-lucide="twitter"></i></a>
+          <a href="https://youtube.com/@PitchShowAI" target="_blank" title="YouTube @PitchShowAI"><i data-lucide="youtube"></i></a>
+          <a href="https://instagram.com/pitchshowai" target="_blank" title="Instagram @pitchshowai"><i data-lucide="instagram"></i></a>
+          <a href="https://tiktok.com/@pitchshowai" target="_blank" title="TikTok @pitchshowai">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.77 1.52V7.17a4.85 4.85 0 01-1-.48z"/></svg>
+          </a>
+          <a href="https://discord.gg/pitchshow" target="_blank" title="Discord">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          </a>
+          <a href="https://reddit.com/r/pitchshow" target="_blank" title="Reddit r/pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </a>
+          <a href="https://producthunt.com/@pitchshow" target="_blank" title="Product Hunt @pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.604 8.4h-3.405V12h3.405a1.8 1.8 0 000-3.6zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4H10.2v3.6H7.8V6h5.804a4.2 4.2 0 010 8.4z"/></svg>
+          </a>
+        </div>
+    <!-- sign-in button: visible after Cloud launch -->
+  </div>
+</aside>
+
+<main class="main pg">
+  <div class="pg-hero">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="pg-hero-inner" style="text-align:left;align-items:flex-start;max-width:720px">
+      <div class="pg-kicker gs-up"><i data-lucide="newspaper" style="width:11px;height:11px"></i> Blog · March 2026</div>
+      <h1 class="pg-h1 gs-up" style="font-size:clamp(28px,4vw,52px)">Presentations are theater.<br/>We've been building the wrong tool.</h1>
+      <p class="pg-sub gs-up" style="text-align:left;max-width:560px">Every slide app asks: how do I make this look good? Nobody asks: how does this person want the audience to feel at the end? That gap is why PitchShow exists.</p>
+      <div class="blog-byline gs-up">
+        <span>PitchShow Team</span><span class="blog-byline-sep">·</span>
+        <span>10 min read</span><span class="blog-byline-sep">·</span>
+        <span style="color:var(--p400)">Product thinking</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-section">
+    <div class="pg-wrap">
+      <article class="blog-article gs-up">
+
+        <p class="blog-lead">Here's something I've never seen a presentation tool ask: <em>How do you want the audience to feel at the end?</em></p>
+
+        <p>Not what you want them to know. Not what you want them to do next. How do you want them to feel.</p>
+
+        <p>Curious? Alarmed? Relieved? Ready to write a check? That moment on the commute home when someone replays your talk in their head and decides they're in — what produces that? Every great presentation has a designed emotional arc. And every slide app I've ever used treats that arc as someone else's problem.</p>
+
+        <hr class="blog-rule"/>
+
+        <h2>The document metaphor is wrong</h2>
+
+        <p>We've been building presentation tools as if presentations are documents with pretty pictures. And they're not. They're performances.</p>
+
+        <p>A document is meant to be read. A presentation is meant to be experienced. The difference matters enormously — because the skills required to produce a good document are almost entirely different from the skills required to produce a good performance.</p>
+
+        <p>Documents reward completeness. Presentations punish it. The investor deck with forty slides of due diligence is a worse pitch than the eight-slide version, not a better one. The academic talk that covers every finding is less memorable than the one that picks three and drives them home. The quarterly review that shows every metric kills the room before slide 6.</p>
+
+        <p>Every experienced presenter knows this. But our tools have never internalized it. PowerPoint was built to help you make beautiful slides. Canva was built to help you make beautiful slides. Gamma was built to help you make beautiful slides with AI. Beautiful slides, beautiful slides, beautiful slides.</p>
+
+        <p>Nobody asked: what's the energy doing? Is this audience going to be confused? Are you building to something, or just listing things?</p>
+
+        <hr class="blog-rule"/>
+
+        <h2>The moment that clarified this for us</h2>
+
+        <p>Early on, we were watching someone use a draft version of PitchShow on a pitch they'd spent weeks preparing. The slides were gorgeous. The AI had done good work. The content was solid.</p>
+
+        <p>They rehearsed it for us. By slide 6, the room was restless. Slide 8 was a data dump that stopped the energy cold. Slide 11 — the market size moment, the most important number in the deck — came and went without any weight. The ask landed on slide 12 and felt like a surprise to everyone in the room, including the presenter.</p>
+
+        <p>The slides were beautiful. The story was broken.</p>
+
+        <p>And we had no tools to show them that. No way to say: "your energy curve crashes here, your key insight is buried, your ask has no runway." We could tell them the deck looked great. We couldn't tell them why it wasn't going to land.</p>
+
+        <p>That conversation changed what we thought we were building.</p>
+
+        <hr class="blog-rule"/>
+
+        <h2>What a presentation actually consists of</h2>
+
+        <p>Think about any talk that moved you. Not impressed you — moved you. Chances are it had these moments, in roughly this order:</p>
+
+        <p><strong>A hook that made you look up from your phone.</strong> Not a title slide with the presenter's name. Something that made you think: wait, I need to hear this. That moment usually involves a counterintuitive fact, a specific story, or a question you didn't expect.</p>
+
+        <p><strong>A tension that built through the middle.</strong> Great presentations create a problem in your mind and then delay solving it. You lean forward because you're not sure where this is going. The tension is the energy that pulls you through.</p>
+
+        <p><strong>A turning point that reframes everything before it.</strong> The moment where the insight lands. Not the conclusion — the pivot. When the thing you thought you were being shown turns out to be evidence for something bigger.</p>
+
+        <p><strong>An ending you remember on the commute home.</strong> Most presentations end with a summary slide and a thank you. The ones that work end with a single, clear, specific thing you're going to think about for the next week. A number. A question. A challenge.</p>
+
+        <p>None of this is in the slide design. It's in the structure. And no presentation tool in history has had any meaningful opinion about structure — until now.</p>
+
+        <hr class="blog-rule"/>
+
+        <h2>How PitchShow thinks about this differently</h2>
+
+        <p>When you start a new deck in PitchShow, before any slides are generated, you see the narrative arc. Not the slides. The story. A beat-by-beat breakdown of what each moment in the presentation is for — where the hook lands, where the tension builds, where the turning point is, where the ask comes.</p>
+
+        <p>You can look at it and say: this is wrong. The insight is in the wrong place. The data section is too long. Move the tension earlier. PitchShow will rebuild around your direction. The slides come after the story, not before it.</p>
+
+        <p>Then there's the preparation layer. Every slide has a research layer underneath it — real citations for every stat, predicted questions for that specific claim, a written answer for each one. Sixty percent of the anxiety people feel before presentations is about being challenged and not having the answer ready. We try to eliminate that anxiety before you step into the room.</p>
+
+        <p>And there's Rehearsal Mode. Full-screen, real timer, per-slide pacing feedback. Run your presentation three times with PitchShow and it will tell you where you're rushing, where you're lingering, where the energy drops. Not because we're trying to be your speaking coach — because that feedback is the difference between a talk that lands and one that doesn't.</p>
+
+        <hr class="blog-rule"/>
+
+        <h2>What we're still missing</h2>
+
+        <p>I want to be honest: we're not there yet on the vision we have for this.</p>
+
+        <p>The narrative arc feedback is good. The research preparation is good. The rehearsal timer is useful. But the system still can't really tell you <em>why</em> your structure isn't working. It can show you that the energy drops at slide 7. It can't yet explain that it drops because you front-loaded too much context before establishing why anyone should care.</p>
+
+        <p>That's the gap. Between "here's a problem in your structure" and "here's what it means and here's how to think about fixing it."</p>
+
+        <p>We're working toward it. The data we'd need is becoming available — years of presentations that worked and ones that didn't, studies on what audiences remember, the architecture of talks that changed minds. The model of what makes a performance land is knowable. It's just not finished yet.</p>
+
+        <hr class="blog-rule"/>
+
+        <h2>The thing that gets us out of bed</h2>
+
+        <p>There are hundreds of millions of important conversations happening every year inside presentation rooms. Funding decisions. Research findings. Policy changes. Medical training. Business strategies that will affect thousands of jobs.</p>
+
+        <p>A huge fraction of them fail to land — not because the ideas are bad, but because the person with the idea didn't have the tools to structure and deliver it well. The ideas die in bad slide decks and flat delivery, not because they weren't worth fighting for.</p>
+
+        <p>We want to build the tool that helps those ideas land. Not just makes them look pretty — actually helps them land, in the room, with the audience that matters.</p>
+
+        <p>That's the version of PitchShow we're trying to reach. We're maybe halfway there. But we know which direction we're walking.</p>
+
+        <hr class="blog-rule"/>
+
+        <div class="blog-cta gs-card">
+          <div class="blog-cta-text">
+            <div class="blog-cta-title">See what a narrative-first deck feels like</div>
+            <div class="blog-cta-sub">Describe your talk, your audience, and your goal. Review the story before a single slide is built. Then tell us if the structure is right.</div>
+          </div>
+          <a href="#" class="btn-pill-primary" data-waitlist style="flex-shrink:0;white-space:nowrap">Start for free <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+        </div>
+
+        <div class="blog-more">
+          <div class="blog-more-label">More from the blog</div>
+          <div class="blog-more-grid">
+            <a href="./blog.html" class="blog-more-card" style="text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--bd2)'" onmouseout="this.style.borderColor='var(--bd)'">
+              <div class="blog-more-tag">Engineering</div>
+              <div class="blog-more-title">The PPTX that moves — why every competitor will eventually hit a wall</div>
+            </a>
+            <a href="./blog-open-source.html" class="blog-more-card" style="text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--bd2)'" onmouseout="this.style.borderColor='var(--bd)'">
+              <div class="blog-more-tag">Strategy</div>
+              <div class="blog-more-title">We open-sourced a commercial product. Everyone told us not to.</div>
+            </a>
+          </div>
+        </div>
+
+      </article>
+    </div>
+  </div>
+</main>
+<script src="vendor/lucide.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

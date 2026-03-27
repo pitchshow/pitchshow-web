@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PitchShow — Community</title>
+<meta name="description" content="PitchShow is open source. The community shapes what gets built next — through GitHub issues, Discord, and decks made in public."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="page.css"/>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
+  <defs>
+    <radialGradient id="ps-grad" cx="40%" cy="28%" r="62%">
+      <stop offset="0%"   stop-color="#FFF9F4"/>
+      <stop offset="52%"  stop-color="#FFE8D8"/>
+      <stop offset="100%" stop-color="#FFD0BA"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<aside class="sidebar" id="sidebar">
+  <button class="sb-search" id="sbSearch" title="Search" aria-label="Search"><i data-lucide="search"></i></button>
+  <nav class="sb-nav">
+    <a href="./index.html" class="sb-item" title="Home"><div class="sb-icon"><i data-lucide="home"></i></div><span class="sb-label">Home</span></a>
+    <a href="./get-started.html" class="sb-item" title="Get started"><div class="sb-icon"><i data-lucide="rocket"></i></div><span class="sb-label">Start</span></a>
+    <a href="./styles.html" class="sb-item" title="Styles"><div class="sb-icon"><i data-lucide="palette"></i></div><span class="sb-label">Styles</span></a>
+    <a href="./docs.html" class="sb-item" title="Docs"><div class="sb-icon"><i data-lucide="book-open"></i></div><span class="sb-label">Docs</span></a>
+    <a href="./community.html" class="sb-item active" title="Community"><div class="sb-icon"><i data-lucide="users"></i></div><span class="sb-label">Community</span></a>
+    <a href="./blog.html" class="sb-item" title="Blog"><div class="sb-icon"><i data-lucide="newspaper"></i></div><span class="sb-label">Blog</span></a>
+  </nav>
+  <nav class="sb-nav sb-nav-bottom">
+    <a href="./pricing.html" class="sb-item" title="Pricing"><div class="sb-icon"><i data-lucide="credit-card"></i></div><span class="sb-label">Pricing</span></a>
+    <a href="./support.html" class="sb-item" title="Support"><div class="sb-icon"><i data-lucide="life-buoy"></i></div><span class="sb-label">Support</span></a>
+    <a href="./enterprise.html" class="sb-item" title="Enterprise"><div class="sb-icon"><i data-lucide="building-2"></i></div><span class="sb-label">Business</span></a>
+  </nav>
+  <div class="sb-footer">
+    <a href="https://github.com/pitchshow/pitchshow" class="sb-icon-btn" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+    <div class="f-soc">
+          <a href="https://github.com/pitchshow/pitchshow" target="_blank" title="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://x.com/pitchshowai" target="_blank" title="X / Twitter @pitchshowai"><i data-lucide="twitter"></i></a>
+          <a href="https://youtube.com/@PitchShowAI" target="_blank" title="YouTube @PitchShowAI"><i data-lucide="youtube"></i></a>
+          <a href="https://instagram.com/pitchshowai" target="_blank" title="Instagram @pitchshowai"><i data-lucide="instagram"></i></a>
+          <a href="https://tiktok.com/@pitchshowai" target="_blank" title="TikTok @pitchshowai">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.77 1.52V7.17a4.85 4.85 0 01-1-.48z"/></svg>
+          </a>
+          <a href="https://discord.gg/pitchshow" target="_blank" title="Discord">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          </a>
+          <a href="https://reddit.com/r/pitchshow" target="_blank" title="Reddit r/pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </a>
+          <a href="https://producthunt.com/@pitchshow" target="_blank" title="Product Hunt @pitchshow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.604 8.4h-3.405V12h3.405a1.8 1.8 0 000-3.6zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4H10.2v3.6H7.8V6h5.804a4.2 4.2 0 010 8.4z"/></svg>
+          </a>
+        </div>
+    <!-- sign-in button: visible after Cloud launch -->
+  </div>
+</aside>
+
+<main class="main pg">
+
+  <!-- ── Hero ── -->
+  <div class="pg-hero">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="pg-hero-inner">
+      <div class="pg-kicker gs-up">Community</div>
+      <h1 class="pg-h1 gs-up">We're building this<br/>in public. Join us.</h1>
+      <p class="pg-sub gs-up">PitchShow is open source. The code is on GitHub, the roadmap is public, and every meaningful decision we've made has come from a conversation with someone who used it. That's not marketing — it's how we actually work.</p>
+    </div>
+  </div>
+
+  <!-- ── Show Your Work ── -->
+  <div class="pg-section">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="presentation" style="width:12px;height:12px"></i>Show your work</div>
+      <h2 class="section-h2 gs-card">We just launched. Be the first.</h2>
+      <p class="pg-lead gs-card">This gallery will fill with real decks made by real people. Investor pitches. Research presentations. Course intros. Product launches. The first few in here will set the tone for everything that follows — that could be yours.</p>
+
+      <div class="comm-first-card gs-card">
+        <div class="comm-first-icon">
+          <svg viewBox="0 0 48 48" fill="none" width="44" height="44">
+            <path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z" fill="url(#ps-grad)"/>
+            <ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#3d6428" transform="rotate(20 27.5 9.5)"/>
+            <path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#5a3818" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="10" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.15)"/>
+            <ellipse cx="38" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.15)"/>
+            <circle cx="16" cy="27" r="2.2" fill="#1a0810"/>
+            <circle cx="32" cy="27" r="2.2" fill="#1a0810"/>
+          </svg>
+        </div>
+        <div class="comm-first-body">
+          <div class="comm-first-title">The gallery is empty. Make something worth showing.</div>
+          <p class="comm-first-sub">Generate a deck with PitchShow. Share the hosted link. Tag <a href="https://x.com/pitchshowai" target="_blank" style="color:var(--p300)">@pitchshowai</a> on X, or drop it in GitHub Discussions. We'll feature the best ones here — with your name on it.</p>
+          <div class="comm-first-actions">
+            <a href="./get-started.html" class="btn-pill-primary" style="font-size:13px;padding:9px 20px">
+              Make your first deck
+              <i data-lucide="arrow-right" style="width:13px;height:13px"></i>
+            </a>
+            <a href="https://github.com/pitchshow/pitchshow/discussions" target="_blank" class="btn-pill-ghost" style="font-size:13px;padding:9px 20px">
+              Share in Discussions
+              <i data-lucide="external-link" style="width:13px;height:13px"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Contribute ── -->
+  <div class="pg-section" style="background:var(--bg1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="git-pull-request" style="width:12px;height:12px"></i>Contribute</div>
+      <h2 class="section-h2 gs-card">The codebase is yours.</h2>
+      <p class="pg-lead gs-card">Apache 2.0. Fork it, modify it, ship it in your own product. If you build something worth merging back, we'll review PRs within 48 hours. Here's where we need the most help right now:</p>
+
+      <div class="comm-contrib-grid">
+        <div class="comm-contrib-card gs-card">
+          <div class="comm-contrib-tag comm-contrib-tag-hot">Good first issue</div>
+          <h3>Export format improvements</h3>
+          <p>PPTX export edge cases — fonts, nested layouts, complex animation sequences. If you care about presentation fidelity, this is the area where effort has the highest visible impact.</p>
+          <a href="https://github.com/pitchshow/pitchshow/issues?q=label%3A%22good+first+issue%22" target="_blank" class="comm-contrib-link">
+            Browse issues <i data-lucide="arrow-right" style="width:12px;height:12px"></i>
+          </a>
+        </div>
+        <div class="comm-contrib-card gs-card">
+          <div class="comm-contrib-tag comm-contrib-tag-hot">Wanted</div>
+          <h3>Windows & Linux testing</h3>
+          <p>We develop primarily on macOS. The Electron app runs on all platforms but we catch Windows and Linux regressions slower than we should. If you run either, installing and reporting what's broken is genuinely valuable.</p>
+          <a href="https://github.com/pitchshow/pitchshow/issues/new" target="_blank" class="comm-contrib-link">
+            Report an issue <i data-lucide="arrow-right" style="width:12px;height:12px"></i>
+          </a>
+        </div>
+        <div class="comm-contrib-card gs-card">
+          <div class="comm-contrib-tag">Discussion</div>
+          <h3>AI provider integrations</h3>
+          <p>We support Bedrock, OpenAI, DeepSeek, Gemini, Groq, Grok. If your preferred provider isn't listed or behaves unexpectedly, open a Discussion. New provider support is usually straightforward to add.</p>
+          <a href="https://github.com/pitchshow/pitchshow/discussions/new" target="_blank" class="comm-contrib-link">
+            Start a discussion <i data-lucide="arrow-right" style="width:12px;height:12px"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="comm-contrib-note gs-card">
+        <i data-lucide="info" style="width:15px;height:15px;color:var(--tx3);flex-shrink:0"></i>
+        <span>Before opening a PR for a large change, open a Discussion first. We'll tell you whether it aligns with where we're heading and save everyone time if it doesn't.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Find us ── -->
+  <div class="pg-section">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="globe" style="width:12px;height:12px"></i>Find us</div>
+      <h2 class="section-h2 gs-card">Where the real conversations happen.</h2>
+      <p class="pg-lead gs-card" style="margin-bottom:32px">We're not on every platform — we're on the ones we actually use. GitHub for code, Discord for conversation, X for updates.</p>
+
+      <div class="comm-platform-grid">
+
+        <a href="https://github.com/pitchshow/pitchshow" target="_blank" class="comm-platform-card gs-card">
+          <div class="comm-platform-icon"><i data-lucide="github" style="width:22px;height:22px"></i></div>
+          <div class="comm-platform-body">
+            <div class="comm-platform-name">GitHub</div>
+            <div class="comm-platform-handle">pitchshow/pitchshow</div>
+            <p class="comm-platform-desc">Source code, issues, PRs, and the full project history. Everything starts here.</p>
+          </div>
+          <i data-lucide="external-link" style="width:13px;height:13px;color:var(--tx3);flex-shrink:0"></i>
+        </a>
+
+        <a href="https://github.com/pitchshow/pitchshow/discussions" target="_blank" class="comm-platform-card gs-card">
+          <div class="comm-platform-icon"><i data-lucide="message-square" style="width:22px;height:22px"></i></div>
+          <div class="comm-platform-body">
+            <div class="comm-platform-name">GitHub Discussions</div>
+            <div class="comm-platform-handle">Feature requests · Q&amp;A · Show &amp; Tell</div>
+            <p class="comm-platform-desc">The best place to request features, ask questions, and share what you've made. We read everything.</p>
+          </div>
+          <i data-lucide="external-link" style="width:13px;height:13px;color:var(--tx3);flex-shrink:0"></i>
+        </a>
+
+        <a href="https://discord.gg/pitchshow" target="_blank" class="comm-platform-card gs-card">
+          <div class="comm-platform-icon"><i data-lucide="hash" style="width:22px;height:22px"></i></div>
+          <div class="comm-platform-body">
+            <div class="comm-platform-name">Discord</div>
+            <div class="comm-platform-handle">discord.gg/pitchshow</div>
+            <p class="comm-platform-desc">Live conversation with the team and other users. Build questions, workflow tips, showing off decks.</p>
+          </div>
+          <i data-lucide="external-link" style="width:13px;height:13px;color:var(--tx3);flex-shrink:0"></i>
+        </a>
+
+        <a href="https://x.com/pitchshowai" target="_blank" class="comm-platform-card gs-card">
+          <div class="comm-platform-icon"><i data-lucide="twitter" style="width:22px;height:22px"></i></div>
+          <div class="comm-platform-body">
+            <div class="comm-platform-name">X / Twitter</div>
+            <div class="comm-platform-handle">@pitchshowai</div>
+            <p class="comm-platform-desc">Release announcements, demos, and the occasional strong opinion about the state of presentation software.</p>
+          </div>
+          <i data-lucide="external-link" style="width:13px;height:13px;color:var(--tx3);flex-shrink:0"></i>
+        </a>
+
+        <a href="https://producthunt.com/@pitchshow" target="_blank" class="comm-platform-card gs-card">
+          <div class="comm-platform-icon"><i data-lucide="trophy" style="width:22px;height:22px"></i></div>
+          <div class="comm-platform-body">
+            <div class="comm-platform-name">Product Hunt</div>
+            <div class="comm-platform-handle">@pitchshow</div>
+            <p class="comm-platform-desc">We're launching on Product Hunt. Follow us there and you'll be first to know when we go live.</p>
+          </div>
+          <i data-lucide="external-link" style="width:13px;height:13px;color:var(--tx3);flex-shrink:0"></i>
+        </a>
+
+        <a href="mailto:hello@pitchshow.ai" class="comm-platform-card gs-card">
+          <div class="comm-platform-icon"><i data-lucide="mail" style="width:22px;height:22px"></i></div>
+          <div class="comm-platform-body">
+            <div class="comm-platform-name">Email</div>
+            <div class="comm-platform-handle">hello@pitchshow.ai</div>
+            <p class="comm-platform-desc">For anything that needs a real human conversation. We reply within 24 hours, usually faster.</p>
+          </div>
+          <i data-lucide="arrow-right" style="width:13px;height:13px;color:var(--tx3);flex-shrink:0"></i>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Brand assets ── -->
+  <div class="pg-section" style="background:var(--bg1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)">
+    <div class="pg-wrap">
+      <div class="section-kicker gs-card"><i data-lucide="smile" style="width:12px;height:12px"></i>Brand assets</div>
+      <h2 class="section-h2 gs-card">The peach is yours to use.</h2>
+      <p class="pg-lead gs-card">Writing a blog post about PitchShow? Building a tutorial? Making a meme? The mascot is free to use — Apache 2.0, no attribution required (though appreciated).</p>
+
+      <div class="mascot-kit-card gs-card">
+        <svg class="mkit-icon" viewBox="0 0 48 48" fill="none">
+          <defs><radialGradient id="mk-g" cx="40%" cy="28%" r="62%"><stop offset="0%" stop-color="#FFF9F4"/><stop offset="52%" stop-color="#FFE8D8"/><stop offset="100%" stop-color="#FFD0BA"/></radialGradient></defs>
+          <path d="M24,14 C21.5,5.5 4,9.5 4,21.5 C4,34 12.5,45 24,45 C35.5,45.5 44,34 44,21 C44,9 26.5,5 24,14 Z" fill="url(#mk-g)"/>
+          <ellipse cx="27.5" cy="9.5" rx="4.8" ry="7.2" fill="#3d6428" transform="rotate(20 27.5 9.5)"/>
+          <path d="M24,14 C24.5,11.5 26,10 27.5,8.5" stroke="#5a3818" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="10" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.18)"/>
+          <ellipse cx="38" cy="33.5" rx="5.5" ry="3.2" fill="rgba(255,140,120,0.18)"/>
+          <path d="M12.5,29 Q16,24 19.5,29" stroke="#1a0810" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M28.5,29 Q32,24 35.5,29" stroke="#1a0810" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M21.5,35 Q24,37.5 26.5,35" stroke="#1a0810" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h3 style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:6px">PitchShow Mascot Kit v4</h3>
+          <p style="font-size:13px;color:var(--tx2);line-height:1.6">11 expression states · Dark and light variants · Social media avatars (GitHub, X, Reddit) · Animated SVGs · Apache 2.0</p>
+        </div>
+        <a href="../__preview__/pitchshow-logo-v4.html" target="_blank" class="btn-pill-primary" style="white-space:nowrap;font-size:13px;padding:10px 18px;flex-shrink:0">
+          <i data-lucide="external-link" style="width:14px;height:14px"></i>
+          View kit
+        </a>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px">
+        <a href="logos/peach-icon.svg" download class="docs-card gs-card" style="padding:16px">
+          <i data-lucide="image" style="width:18px;height:18px"></i>
+          <div><div style="font-size:13px;font-weight:600;color:var(--tx)">Icon (transparent)</div><div style="font-size:11px;color:var(--tx3)">SVG · any size</div></div>
+        </a>
+        <a href="logos/logo-horizontal-dark.svg" download class="docs-card gs-card" style="padding:16px">
+          <i data-lucide="type" style="width:18px;height:18px"></i>
+          <div><div style="font-size:13px;font-weight:600;color:var(--tx)">Horizontal logo</div><div style="font-size:11px;color:var(--tx3)">SVG · dark background</div></div>
+        </a>
+        <a href="logos/avatar-github.svg" download class="docs-card gs-card" style="padding:16px">
+          <i data-lucide="github" style="width:18px;height:18px"></i>
+          <div><div style="font-size:13px;font-weight:600;color:var(--tx)">GitHub Avatar</div><div style="font-size:11px;color:var(--tx3)">SVG · 400×400</div></div>
+        </a>
+        <a href="mailto:hello@pitchshow.ai?subject=Brand%20Kit%20Request" class="docs-card gs-card" style="padding:16px">
+          <i data-lucide="mail" style="width:18px;height:18px"></i>
+          <div><div style="font-size:13px;font-weight:600;color:var(--tx)">Full press kit</div><div style="font-size:11px;color:var(--tx3)">PNG exports · request via email</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script src="vendor/lucide.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="page.js"></script>
+</body>
+</html>
