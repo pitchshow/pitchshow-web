@@ -35,7 +35,7 @@ pitchshow-web/
 ## Deploy
 
 ```bash
-# From musedeck/ repo root
+# From pitchshow/ repo root
 npx wrangler pages deploy pitchshow-web --project-name pitchshow
 ```
 
